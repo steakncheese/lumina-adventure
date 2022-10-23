@@ -18,9 +18,38 @@ let playerInfo = [
     gold: 100,
   },
 ];
+let enemyInfo = [
+  {
+    name: "Zombie",
+    attack: 7,
+    life: 100,
+    livingStatus: 1,
+    relic: 1,
+  },
+  {
+    name: "Wild Boar",
+    attack: 7,
+    life: 100,
+    livingStatus: 1,
+    relic: 1,
+  },
+  {
+    name: "Wild Spider",
+    attack: 7,
+    life: 100,
+    livingStatus: 1,
+    relic: 1,
+  },
+  {
+    name: "Tutorial Dungeon Master",
+    attack: 14,
+    life: 200,
+    livingStatus: 1,
+  },
+];
 function askPlayerName() {
-  // playerName = rl.question(`What is your name hero?`);
-  return `hello`;
+  // playerInfo[0].name = rl.question(`What is your name hero?`);
+  return `${welcome}`;
 }
 let cheatTrigger = [0, 0];
 function poweroverwhelming() {
@@ -89,10 +118,24 @@ function east() {
 function location() {
   return `You are located at: (${x}, ${y})`;
 }
+function attack() {
+  if (x == 1 && y == 0 && enemyInfo[0].livingStatus == 1) {
+    let enemyNum = 0;
+    enemyInfo[enemyNum].life = enemyInfo[enemyNum].life - playerInfo[0].attack;
+    playerInfo[0].life = playerInfo[0].life - enemyInfo[enemyNum].attack;
+    return `You have attacked ${enemyInfo[enemyNum].name} for ${playerInfo[0].attack} damage. ${enemyInfo[enemyNum].name}'s life: ${enemyInfo[enemyNum].life} health points
+    ${enemyInfo[enemyNum].name} have attacked you for ${enemyInfo[enemyNum].attack} damage. ${playerInfo[0].name}'s life: ${playerInfo[0].life} health points`;
+  }
+}
 function observe() {
   if (x == 0 && y == 0) {
     return `You have seen a hungry homeless peron. He is asking for 100 gold. You know that a signle meal only costs 5 gold.
     You currently have ${playerInfo[0].gold} gold. You can type /give to give your gold.`;
+  } else if (x == 1 && y == 1) {
+    return `You see the house of the reknown healer, Yuna. She has been to make great battle healing the villagers and heroes alike.
+    She loves solititude and peace. The house you see is simple but strong. You beautiful little crystals all around her house.
+    You realize that those crystals are explosives in disguise. Mess with Yuna and you know you are going in a world of hurt.
+      To restore your life points type /heal`;
   } else {
     return `There is nothing here`;
   }
@@ -139,6 +182,7 @@ function status() {
 }
 function help() {
   return `Instructions: To move, type [/w] North, [/s] South, [/a] West, or [/d] East then press Enter.
+  To see info on current location: /o or /observe *** Reccomendation: use in every tile you go ***
   To see where you are located: /location
   To attack an enemy: /k
   The other things you must learn as you go. For it is by fire that gold is made.`;
@@ -149,7 +193,10 @@ app.get("/help", (request, response) => {
 app.get("/heal", (request, response) => {
   response.send(heal());
 });
-app.put("/", (request, response) => {
+app.get("/attack", (request, response) => {
+  response.send(attack());
+});
+app.get("/", (request, response) => {
   response.send(askPlayerName());
 });
 app.get("/welcome", (request, response) => {

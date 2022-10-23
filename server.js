@@ -12,9 +12,10 @@ let y = 0;
 let playerInfo = [
   {
     name: `Unnamed Hero`,
-    playerAttack: 27,
-    playerLife: 100,
-    playerMaxLife: 100,
+    attack: 27,
+    life: 100,
+    maxLife: 100,
+    gold: 100,
   },
 ];
 function askPlayerName() {
@@ -25,8 +26,8 @@ let cheatTrigger = [0, 0];
 function poweroverwhelming() {
   if (cheatTrigger[0] === 0) {
     cheatTrigger[0]++;
-    playerInfo[0].playerMaxLife = playerInfo[0].playerMaxLife + 100;
-    return `Cheat activated: Max life +100. Current Life: ${playerInfo[0].playerMaxLife} health points.`;
+    playerInfo[0].maxLife = playerInfo[0].maxLife + 100;
+    return `Cheat activated: Max life +100. Current Life: ${playerInfo[0].maxLife} health points.`;
   } else {
     return `You cannot use this cheat again.`;
   }
@@ -90,24 +91,51 @@ function location() {
 }
 function observe() {
   if (x == 0 && y == 0) {
-    return `You have seen a homeless peron`;
+    return `You have seen a hungry homeless peron. He is asking for 100 gold. You know that a signle meal only costs 5 gold.
+    You currently have ${playerInfo[0].gold} gold. You can type /give to give your gold.`;
   } else {
     return `There is nothing here`;
   }
 }
+let event = [0, 0];
+function give() {
+  if (x == 0 && y == 0 && event[0] == 0) {
+    playerInfo[0].gold = playerInfo[0].gold - 100;
+    event[0]++;
+    return `You currently have ${playerInfo[0].gold} gold. He wants to /talk to you.`;
+  } else {
+    return `You cannot give anymore.`;
+  }
+}
+function talk() {
+  if (x == 0 && y == 0 && event[0] == 1) {
+    playerInfo[0].maxLife = playerInfo[0].maxLife + 10;
+    event[0]++;
+    return `The homeless man smiles at you. He hasn't eaten for days and has tons of debts to pay. 
+    He looks at you and says I cannot pay you back your gold.
+    But I have something that might be valuable to you when the time comes.
+    If your life is in danger, go to (1,1) to find Yuna, the Healer. She will tend your wounds until you are healthy.
+    Thank you adventurer. May the Great Spirit be with you. He smiles gently as he walks away from you.
+        You have gained +10 max life.     You're current max life points is now: ${playerInfo[0].maxLife}`;
+  } else {
+    return `There is no one to talk to.`;
+  }
+}
+
+function heal() {
+  if (x == 1 && y == 1) {
+    playerInfo[0].life = playerInfo[0].maxLife;
+    return `Yuna, the Healer: Hello adventurer! Free heals for you.
+    Your health has been restored to full.     You're current life points is now: ${playerInfo[0].life}`;
+  } else {
+    return `You are at (${x}, ${y}). This is not the place for you to get healed.`;
+  }
+}
 function status() {
-  let playerInfo = [
-    {
-      name: `Unnamed Hero`,
-      playerAttack: 27,
-      playerLife: 100,
-      playerMaxLife: 100,
-    },
-  ];
   return `Status:
   Name: ${playerInfo[0].name}
-  Attack: ${playerInfo[0].playerAttack}
-  Life: ${playerInfo[0].playerLife}/${playerInfo[0].playerMaxLife}`;
+  Attack: ${playerInfo[0].attack}
+  Life: ${playerInfo[0].life}/${playerInfo[0].maxLife}`;
 }
 function help() {
   return `Instructions: To move, type [/w] North, [/s] South, [/a] West, or [/d] East then press Enter.
@@ -117,6 +145,9 @@ function help() {
 }
 app.get("/help", (request, response) => {
   response.send(help());
+});
+app.get("/heal", (request, response) => {
+  response.send(heal());
 });
 app.put("/", (request, response) => {
   response.send(askPlayerName());
@@ -139,11 +170,17 @@ app.get("/a", (request, response) => {
 app.get("/o", (request, response) => {
   response.send(observe());
 });
+app.get("/give", (request, response) => {
+  response.send(give());
+});
 app.get("/location", (request, response) => {
   response.send(location());
 });
 app.get("/status", (request, response) => {
   response.send(status());
+});
+app.get("/talk", (request, response) => {
+  response.send(talk());
 });
 app.get("/poweroverwhelming", (request, response) => {
   response.send(poweroverwhelming());

@@ -66,6 +66,72 @@ let enemyInfo = [
     skill: "Tail Whip",
   },
   {
+    name: "Wild Leopard",
+    // id: 04,
+    attack: 11,
+    life: 100,
+    livingStatus: 1,
+    gold: 50,
+    relic: 1,
+    exp: 100,
+    skill: "Swift Tackle",
+  },
+  {
+    name: "Desert Bee",
+    // id: 05,
+    attack: 8,
+    life: 100,
+    livingStatus: 1,
+    gold: 50,
+    relic: 1,
+    exp: 100,
+    skill: "Bee Drill Breaker!!!",
+  },
+  {
+    name: "Water Tortoise",
+    // id: 06,
+    attack: 8,
+    life: 100,
+    livingStatus: 1,
+    gold: 50,
+    relic: 1,
+    exp: 100,
+    skill: "Hydro Blast",
+  },
+  {
+    name: "Seaman",
+    // id: 07,
+    attack: 12,
+    life: 100,
+    livingStatus: 1,
+    gold: 50,
+    relic: 1,
+    exp: 100,
+    skill: "Trident Throw",
+  },
+  {
+    name: "Iron Giant",
+    // id: 07,
+    attack: 22,
+    life: 200,
+    livingStatus: 1,
+    gold: 250,
+    relic: 1,
+    exp: 300,
+    skill: "Giant Smash!",
+  },
+  {
+    name: "Water",
+    // id: 07,
+    attack: 23,
+    life: 190,
+    livingStatus: 1,
+    gold: 260,
+    relic: 1,
+    exp: 300,
+    skill: "Dragon Blast",
+  },
+  {
     name: "Tutorial Dungeon Master",
     attack: 14,
     life: 200,
@@ -79,9 +145,9 @@ function attack() {
     enemyInfo[enemyNum].life = enemyInfo[enemyNum].life - playerInfo[0].attack;
     playerInfo[0].life = playerInfo[0].life - enemyInfo[enemyNum].attack;
     if (playerInfo[0].life <= 0) {
-      return `You have attacked ${enemyInfo[enemyNum].name} for ${playerInfo[0].attack} damage. --- ${enemyInfo[enemyNum].name}'s life: ${enemyInfo[enemyNum].life} health points
-      ${enemyInfo[enemyNum].name} have attacked you with ${enemyInfo[enemyNum].skill} for ${enemyInfo[enemyNum].attack} damage. --- ${playerInfo[0].name}'s life: ${playerInfo[0].life} health points
-      \n\u2605\u2605\u2605  You have been defeated by ${enemyInfo[enemyNum].name}.  \u2605\u2605\u2605
+      return `\n\x1b[92mYou\x1b[0m have attacked \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m for \x1b[31m${playerInfo[0].attack}\x1b[0m damage. --- \x1b[35m${enemyInfo[enemyNum].name}'s life:\x1b[0m \x1b[33m${enemyInfo[enemyNum].life}\x1b[0m health points
+        \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m have attacked \x1b[92myou\x1b[0m with \x1b[36m${enemyInfo[enemyNum].skill}\x1b[0m for \x1b[31m${enemyInfo[enemyNum].attack}\x1b[0m damage. --- \x1b[92m${playerInfo[0].name}'s life:\x1b[0m \x1b[33m0\x1b[0m health points
+      \n\x1b[31m\u2605\u2605\u2605  You have been defeated by ${enemyInfo[enemyNum].name}.  \u2605\u2605\u2605\x1b[0m
       --- GAME OVER ---`;
     }
     if (enemyInfo[enemyNum].life <= 0) {
@@ -89,11 +155,11 @@ function attack() {
       playerInfo[0].life = playerInfo[0].life + enemyInfo[enemyNum].attack;
       playerInfo[0].gold = playerInfo[0].gold + enemyInfo[enemyNum].gold;
       playerInfo[0].exp = playerInfo[0].exp + enemyInfo[enemyNum].exp;
-      return `You have attacked ${enemyInfo[enemyNum].name} for ${playerInfo[0].attack} damage. --- ${enemyInfo[enemyNum].name}'s life: 0 health points
-        \n\u2605\u2605\u2605  Victory! You have killed ${enemyInfo[enemyNum].name}. You have gained ${enemyInfo[enemyNum].gold} gold and ${enemyInfo[enemyNum].exp} experience. \u2605\u2605\u2605`;
+      return `\n\x1b[92mYou\x1b[0m have attacked \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m for \x1b[31m${playerInfo[0].attack}\x1b[0m damage. --- \x1b[35m${enemyInfo[enemyNum].name}'s life:\x1b[0m 0 health points
+        \n\x1b[33m\u2605\u2605\u2605  Victory! You have killed ${enemyInfo[enemyNum].name}. You have gained ${enemyInfo[enemyNum].gold} gold and ${enemyInfo[enemyNum].exp} experience. \u2605\u2605\u2605\x1b[0m`;
     } else {
-      return `You have attacked ${enemyInfo[enemyNum].name} for ${playerInfo[0].attack} damage. --- ${enemyInfo[enemyNum].name}'s life: ${enemyInfo[enemyNum].life} health points
-      ${enemyInfo[enemyNum].name} have attacked you with ${enemyInfo[enemyNum].skill} for ${enemyInfo[enemyNum].attack} damage. --- ${playerInfo[0].name}'s life: ${playerInfo[0].life} health points`;
+      return `\n\x1b[92mYou\x1b[0m have attacked \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m for \x1b[31m${playerInfo[0].attack}\x1b[0m damage. --- \x1b[35m${enemyInfo[enemyNum].name}'s life:\x1b[0m \x1b[33m${enemyInfo[enemyNum].life}\x1b[0m health points
+        \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m have attacked \x1b[92myou\x1b[0m with \x1b[36m${enemyInfo[enemyNum].skill}\x1b[0m for \x1b[31m${enemyInfo[enemyNum].attack}\x1b[0m damage. --- \x1b[92m${playerInfo[0].name}'s life:\x1b[0m \x1b[33m${playerInfo[0].life}\x1b[0m health points\n`;
     }
   } else if (x == -1 && y == 0 && enemyInfo[1].livingStatus == 1) {
     let enemyNum = 1;

@@ -12,6 +12,7 @@ let y = 0;
 let playerInfo = [
   {
     name: `adventurer`,
+    weapon: `baseball bat`,
     attack: 27,
     life: 100,
     maxLife: 100,
@@ -57,6 +58,126 @@ let enemyInfo = [
     livingStatus: 1,
   },
 ];
+
+function attack() {
+  if (x == 1 && y == 0 && enemyInfo[0].livingStatus == 1) {
+    let enemyNum = 0;
+    enemyInfo[enemyNum].life = enemyInfo[enemyNum].life - playerInfo[0].attack;
+    playerInfo[0].life = playerInfo[0].life - enemyInfo[enemyNum].attack;
+    if (enemyInfo[enemyNum].life <= 0) {
+      enemyInfo[enemyNum].livingStatus = enemyInfo[enemyNum].livingStatus - 1;
+      playerInfo[0].life = playerInfo[0].life + enemyInfo[enemyNum].attack;
+      playerInfo[0].gold = playerInfo[0].gold + enemyInfo[enemyNum].gold;
+      playerInfo[0].exp = playerInfo[0].exp + enemyInfo[enemyNum].exp;
+      return `You have attacked ${enemyInfo[enemyNum].name} for ${playerInfo[0].attack} damage. ${enemyInfo[enemyNum].name}'s life: 0 health points
+        \n\u2605\u2605\u2605  Victory! You have killed ${enemyInfo[enemyNum].name}. You have gained ${enemyInfo[enemyNum].gold} gold and ${enemyInfo[enemyNum].exp} experience. \u2605\u2605\u2605`;
+    } else {
+      return `You have attacked ${enemyInfo[enemyNum].name} for ${playerInfo[0].attack} damage. ${enemyInfo[enemyNum].name}'s life: ${enemyInfo[enemyNum].life} health points
+      ${enemyInfo[enemyNum].name} have attacked you for ${enemyInfo[enemyNum].attack} damage. ${playerInfo[0].name}'s life: ${playerInfo[0].life} health points`;
+    }
+  } else if (x == -1 && y == 0 && enemyInfo[0].livingStatus == 1) {
+    let enemyNum = 1;
+    enemyInfo[enemyNum].life = enemyInfo[enemyNum].life - playerInfo[0].attack;
+    playerInfo[0].life = playerInfo[0].life - enemyInfo[enemyNum].attack;
+    if (enemyInfo[enemyNum].life <= 0) {
+      enemyInfo[enemyNum].livingStatus = enemyInfo[enemyNum].livingStatus - 1;
+      playerInfo[0].life = playerInfo[0].life + enemyInfo[enemyNum].attack;
+      playerInfo[0].gold = playerInfo[0].gold + enemyInfo[enemyNum].gold;
+      playerInfo[0].exp = playerInfo[0].exp + enemyInfo[enemyNum].exp;
+      return `You have attacked ${enemyInfo[enemyNum].name} for ${playerInfo[0].attack} damage. ${enemyInfo[enemyNum].name}'s life: 0 health points
+        \n\u2605\u2605\u2605  Victory! You have killed ${enemyInfo[enemyNum].name}. You have gained ${enemyInfo[enemyNum].gold} gold and ${enemyInfo[enemyNum].exp} experience. \u2605\u2605\u2605
+        The village elder Ran tells you that her house is just located south at (-1,-1). Kill all the monsters surrounding the starting location to get a reward.`;
+    } else {
+      return `You have attacked ${enemyInfo[enemyNum].name} for ${playerInfo[0].attack} damage. ${enemyInfo[enemyNum].name}'s life: ${enemyInfo[enemyNum].life} health points
+      ${enemyInfo[enemyNum].name} have attacked you for ${enemyInfo[enemyNum].attack} damage. ${playerInfo[0].name}'s life: ${playerInfo[0].life} health points`;
+    }
+  } else {
+    return `There is nothing to attack here.`;
+  }
+}
+function observe() {
+  if (x == 0 && y == 0) {
+    return `You have seen a hungry homeless peron. He is asking for 100 gold. You know that a signle meal only costs 5 gold.
+    You currently have ${playerInfo[0].gold} gold. You can type /give to give your gold.`;
+  } else if (x == 1 && y == 1) {
+    return `You see the house of the reknown healer, Yuna. She has been to make great battle healing the villagers and heroes alike.
+    She loves solititude and peace. The house you see is simple but strong. You beautiful little crystals all around her house.
+    You realize that those crystals are explosives in disguise. Mess with Yuna and you know you are going in a world of hurt.
+      To restore your life points type /heal`;
+  } else if (x == 1 && y == 0 && enemyInfo[0].livingStatus == 1) {
+    return `You see a zombie. The villagers at the top of their house sigh with relief. 
+    The zombie sees you. The zombie chases you. "Arrrrrggghhhh Brrraaaaiiiinssss" the zombie screams.`;
+  } else if (x == -1 && y == 0 && enemyInfo[1].livingStatus == 1) {
+    return `You see a wild boar. It sees you and stopped attacking the villagers. 
+    One of the villagers Kayne, shouts to you: "It is slow but hits hard. Give that beast a nice beating"`;
+  } else if (
+    x == -1 &&
+    y == -1 &&
+    enemyInfo[1].livingStatus == 0 &&
+    event[1] == 0
+  ) {
+    playerInfo[0].maxLife = playerInfo[0].maxLife + 20;
+    playerInfo[0].gold = playerInfo[0].gold + 75;
+    event[1]++;
+    return `Village Elder Ran: "Thank you ${playerInfo[0].name}. You are our village's savior!
+    Let me present you a star award. For the Stars are with you."
+      You have gained +20 max life.     You're current max life points is now: ${playerInfo[0].maxLife}
+      You have gained 85 gold.     You're current gold is now: ${playerInfo[0].gold}`;
+  } else if (x == -1 && y == -1 && event[1] == 0) {
+    return `There is an old house here. It is sturdy and surrounded by totems. You can feel majestic energy surrounding the house.
+    It has a signage saying: "Village Elder Ran's House."`;
+  } else {
+    return `There is nothing here.`;
+  }
+}
+let event = [0, 0];
+function give() {
+  if (x == 0 && y == 0 && event[0] == 0) {
+    playerInfo[0].gold = playerInfo[0].gold - 100;
+    event[0]++;
+    return `You currently have ${playerInfo[0].gold} gold. He wants to /talk to you.`;
+  } else {
+    return `You cannot give anymore.`;
+  }
+}
+function talk() {
+  if (x == 0 && y == 0 && event[0] == 1) {
+    playerInfo[0].maxLife = playerInfo[0].maxLife + 10;
+    event[0]++;
+    return `The homeless man smiles at you. He hasn't eaten for days and has tons of debts to pay. 
+    He looks at you and says I cannot pay you back your gold.
+    But I have something that might be valuable to you when the time comes.
+    If your life is in danger, go to (1,1) to find Yuna, the Healer. She will tend your wounds until you are healthy.
+    Thank you adventurer. May the Great Spirit be with you. He smiles gently as he walks away from you.
+        You have gained +10 max life.     You're current max life points is now: ${playerInfo[0].maxLife}`;
+  } else {
+    return `There is no one to talk to.`;
+  }
+}
+function heal() {
+  if (x == 1 && y == 1) {
+    playerInfo[0].life = playerInfo[0].maxLife;
+    return `Yuna, the Healer: Hello ${playerInfo[0].name}! Free heals for you.
+    Your health has been restored to full.     You're current life points is now: ${playerInfo[0].life}`;
+  } else {
+    return `You are at (${x}, ${y}). This is not the place for you to get healed.`;
+  }
+}
+function status() {
+  return `Status:
+  Name: ${playerInfo[0].name}
+  Attack: ${playerInfo[0].attack}
+  Life: ${playerInfo[0].life}/${playerInfo[0].maxLife}
+  Gold: ${playerInfo[0].gold}
+  Experience: ${playerInfo[0].exp}`;
+}
+function help() {
+  return `Instructions: To move, type [/w] North, [/s] South, [/a] West, or [/d] East then press Enter.
+  To see info on current location: /o or /observe *** Reccomendation: use in every tile you go ***
+  To see where you are located: /location
+  To attack an enemy: /k
+  The other things you must learn as you go. For it is by fire that gold is made.`;
+}
 function askPlayerName() {
   // playerInfo[0].name = rl.question(`What is your name hero?`);
   return `${welcome}`;
@@ -129,91 +250,7 @@ function east() {
 function location() {
   return `You are located at: (${x}, ${y})`;
 }
-function encounterEnemy(enemyNum) {
-  console.log("Hello");
-}
-function attack() {
-  if (x == 1 && y == 0 && enemyInfo[0].livingStatus == 1) {
-    let enemyNum = 0;
-    enemyInfo[enemyNum].life = enemyInfo[enemyNum].life - playerInfo[0].attack;
-    playerInfo[0].life = playerInfo[0].life - enemyInfo[enemyNum].attack;
-    if (enemyInfo[enemyNum].life <= 0) {
-      enemyInfo[enemyNum].livingStatus = enemyInfo[enemyNum].livingStatus - 1;
-      playerInfo[0].life = playerInfo[0].life + enemyInfo[enemyNum].attack;
-      playerInfo[0].gold = playerInfo[0].gold + enemyInfo[enemyNum].gold;
-      playerInfo[0].exp = playerInfo[0].exp + enemyInfo[enemyNum].exp;
-      return `You have attacked ${enemyInfo[enemyNum].name} for ${playerInfo[0].attack} damage. ${enemyInfo[enemyNum].name}'s life: 0 health points
-        \n\u2605\u2605\u2605  Victory! You have killed ${enemyInfo[enemyNum].name}. You have gained ${enemyInfo[enemyNum].gold} gold and ${enemyInfo[enemyNum].exp} experience. \u2605\u2605\u2605`;
-    } else {
-      return `You have attacked ${enemyInfo[enemyNum].name} for ${playerInfo[0].attack} damage. ${enemyInfo[enemyNum].name}'s life: ${enemyInfo[enemyNum].life} health points
-      ${enemyInfo[enemyNum].name} have attacked you for ${enemyInfo[enemyNum].attack} damage. ${playerInfo[0].name}'s life: ${playerInfo[0].life} health points`;
-    }
-  } else {
-    return `There is nothing to attack here.`;
-  }
-}
-function observe() {
-  if (x == 0 && y == 0) {
-    return `You have seen a hungry homeless peron. He is asking for 100 gold. You know that a signle meal only costs 5 gold.
-    You currently have ${playerInfo[0].gold} gold. You can type /give to give your gold.`;
-  } else if (x == 1 && y == 1) {
-    return `You see the house of the reknown healer, Yuna. She has been to make great battle healing the villagers and heroes alike.
-    She loves solititude and peace. The house you see is simple but strong. You beautiful little crystals all around her house.
-    You realize that those crystals are explosives in disguise. Mess with Yuna and you know you are going in a world of hurt.
-      To restore your life points type /heal`;
-  } else {
-    return `There is nothing here`;
-  }
-}
-let event = [0, 0];
-function give() {
-  if (x == 0 && y == 0 && event[0] == 0) {
-    playerInfo[0].gold = playerInfo[0].gold - 100;
-    event[0]++;
-    return `You currently have ${playerInfo[0].gold} gold. He wants to /talk to you.`;
-  } else {
-    return `You cannot give anymore.`;
-  }
-}
-function talk() {
-  if (x == 0 && y == 0 && event[0] == 1) {
-    playerInfo[0].maxLife = playerInfo[0].maxLife + 10;
-    event[0]++;
-    return `The homeless man smiles at you. He hasn't eaten for days and has tons of debts to pay. 
-    He looks at you and says I cannot pay you back your gold.
-    But I have something that might be valuable to you when the time comes.
-    If your life is in danger, go to (1,1) to find Yuna, the Healer. She will tend your wounds until you are healthy.
-    Thank you adventurer. May the Great Spirit be with you. He smiles gently as he walks away from you.
-        You have gained +10 max life.     You're current max life points is now: ${playerInfo[0].maxLife}`;
-  } else {
-    return `There is no one to talk to.`;
-  }
-}
 
-function heal() {
-  if (x == 1 && y == 1) {
-    playerInfo[0].life = playerInfo[0].maxLife;
-    return `Yuna, the Healer: Hello ${playerInfo[0].name}! Free heals for you.
-    Your health has been restored to full.     You're current life points is now: ${playerInfo[0].life}`;
-  } else {
-    return `You are at (${x}, ${y}). This is not the place for you to get healed.`;
-  }
-}
-function status() {
-  return `Status:
-  Name: ${playerInfo[0].name}
-  Attack: ${playerInfo[0].attack}
-  Life: ${playerInfo[0].life}/${playerInfo[0].maxLife}
-  Gold: ${playerInfo[0].gold}
-  Experience: ${playerInfo[0].exp}`;
-}
-function help() {
-  return `Instructions: To move, type [/w] North, [/s] South, [/a] West, or [/d] East then press Enter.
-  To see info on current location: /o or /observe *** Reccomendation: use in every tile you go ***
-  To see where you are located: /location
-  To attack an enemy: /k
-  The other things you must learn as you go. For it is by fire that gold is made.`;
-}
 app.get("/help", (request, response) => {
   response.send(help());
 });

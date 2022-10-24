@@ -11,8 +11,8 @@ let x = 0;
 let y = 0;
 let playerInfo = [
   {
-    name: `adventurer`,
-    weapon: `baseball bat`,
+    name: `Adventurer`,
+    weapon: `Baseball Bat`,
     attack: 27,
     life: 100,
     maxLife: 100,
@@ -23,6 +23,7 @@ let playerInfo = [
 let enemyInfo = [
   {
     name: "Zombie",
+    // id: 00,
     attack: 7,
     life: 100,
     livingStatus: 1,
@@ -33,6 +34,7 @@ let enemyInfo = [
   },
   {
     name: "Wild Boar",
+    // id: 01,
     attack: 8,
     life: 100,
     livingStatus: 1,
@@ -43,13 +45,25 @@ let enemyInfo = [
   },
   {
     name: "Wild Spider",
+    // id: 02,
     attack: 9,
     life: 100,
     livingStatus: 1,
     gold: 50,
     relic: 1,
     exp: 100,
-    skill: "Web spin",
+    skill: "Web Spin",
+  },
+  {
+    name: "Mutant Fox",
+    // id: 03,
+    attack: 9,
+    life: 100,
+    livingStatus: 1,
+    gold: 50,
+    relic: 1,
+    exp: 100,
+    skill: "Tail Whip",
   },
   {
     name: "Tutorial Dungeon Master",
@@ -64,32 +78,86 @@ function attack() {
     let enemyNum = 0;
     enemyInfo[enemyNum].life = enemyInfo[enemyNum].life - playerInfo[0].attack;
     playerInfo[0].life = playerInfo[0].life - enemyInfo[enemyNum].attack;
+    if (playerInfo[0].life <= 0) {
+      return `You have attacked ${enemyInfo[enemyNum].name} for ${playerInfo[0].attack} damage. --- ${enemyInfo[enemyNum].name}'s life: ${enemyInfo[enemyNum].life} health points
+      ${enemyInfo[enemyNum].name} have attacked you with ${enemyInfo[enemyNum].skill} for ${enemyInfo[enemyNum].attack} damage. --- ${playerInfo[0].name}'s life: ${playerInfo[0].life} health points
+      \n\u2605\u2605\u2605  You have been defeated by ${enemyInfo[enemyNum].name}.  \u2605\u2605\u2605
+      --- GAME OVER ---`;
+    }
     if (enemyInfo[enemyNum].life <= 0) {
       enemyInfo[enemyNum].livingStatus = enemyInfo[enemyNum].livingStatus - 1;
       playerInfo[0].life = playerInfo[0].life + enemyInfo[enemyNum].attack;
       playerInfo[0].gold = playerInfo[0].gold + enemyInfo[enemyNum].gold;
       playerInfo[0].exp = playerInfo[0].exp + enemyInfo[enemyNum].exp;
-      return `You have attacked ${enemyInfo[enemyNum].name} for ${playerInfo[0].attack} damage. ${enemyInfo[enemyNum].name}'s life: 0 health points
+      return `You have attacked ${enemyInfo[enemyNum].name} for ${playerInfo[0].attack} damage. --- ${enemyInfo[enemyNum].name}'s life: 0 health points
         \n\u2605\u2605\u2605  Victory! You have killed ${enemyInfo[enemyNum].name}. You have gained ${enemyInfo[enemyNum].gold} gold and ${enemyInfo[enemyNum].exp} experience. \u2605\u2605\u2605`;
     } else {
-      return `You have attacked ${enemyInfo[enemyNum].name} for ${playerInfo[0].attack} damage. ${enemyInfo[enemyNum].name}'s life: ${enemyInfo[enemyNum].life} health points
-      ${enemyInfo[enemyNum].name} have attacked you for ${enemyInfo[enemyNum].attack} damage. ${playerInfo[0].name}'s life: ${playerInfo[0].life} health points`;
+      return `You have attacked ${enemyInfo[enemyNum].name} for ${playerInfo[0].attack} damage. --- ${enemyInfo[enemyNum].name}'s life: ${enemyInfo[enemyNum].life} health points
+      ${enemyInfo[enemyNum].name} have attacked you with ${enemyInfo[enemyNum].skill} for ${enemyInfo[enemyNum].attack} damage. --- ${playerInfo[0].name}'s life: ${playerInfo[0].life} health points`;
     }
-  } else if (x == -1 && y == 0 && enemyInfo[0].livingStatus == 1) {
+  } else if (x == -1 && y == 0 && enemyInfo[1].livingStatus == 1) {
     let enemyNum = 1;
     enemyInfo[enemyNum].life = enemyInfo[enemyNum].life - playerInfo[0].attack;
     playerInfo[0].life = playerInfo[0].life - enemyInfo[enemyNum].attack;
+    if (playerInfo[0].life <= 0) {
+      return `You have attacked ${enemyInfo[enemyNum].name} for ${playerInfo[0].attack} damage. --- ${enemyInfo[enemyNum].name}'s life: ${enemyInfo[enemyNum].life} health points
+      ${enemyInfo[enemyNum].name} have attacked you with ${enemyInfo[enemyNum].skill} for ${enemyInfo[enemyNum].attack} damage. --- ${playerInfo[0].name}'s life: ${playerInfo[0].life} health points
+      \n\u2605\u2605\u2605  You have been defeated by ${enemyInfo[enemyNum].name}.  \u2605\u2605\u2605
+      --- GAME OVER ---`;
+    }
     if (enemyInfo[enemyNum].life <= 0) {
       enemyInfo[enemyNum].livingStatus = enemyInfo[enemyNum].livingStatus - 1;
       playerInfo[0].life = playerInfo[0].life + enemyInfo[enemyNum].attack;
       playerInfo[0].gold = playerInfo[0].gold + enemyInfo[enemyNum].gold;
       playerInfo[0].exp = playerInfo[0].exp + enemyInfo[enemyNum].exp;
-      return `You have attacked ${enemyInfo[enemyNum].name} for ${playerInfo[0].attack} damage. ${enemyInfo[enemyNum].name}'s life: 0 health points
+      return `You have attacked ${enemyInfo[enemyNum].name} for ${playerInfo[0].attack} damage. --- ${enemyInfo[enemyNum].name}'s life: 0 health points
         \n\u2605\u2605\u2605  Victory! You have killed ${enemyInfo[enemyNum].name}. You have gained ${enemyInfo[enemyNum].gold} gold and ${enemyInfo[enemyNum].exp} experience. \u2605\u2605\u2605
         The village elder Ran tells you that her house is just located south at (-1,-1). Kill all the monsters surrounding the starting location to get a reward.`;
     } else {
-      return `You have attacked ${enemyInfo[enemyNum].name} for ${playerInfo[0].attack} damage. ${enemyInfo[enemyNum].name}'s life: ${enemyInfo[enemyNum].life} health points
-      ${enemyInfo[enemyNum].name} have attacked you for ${enemyInfo[enemyNum].attack} damage. ${playerInfo[0].name}'s life: ${playerInfo[0].life} health points`;
+      return `You have attacked ${enemyInfo[enemyNum].name} for ${playerInfo[0].attack} damage. --- ${enemyInfo[enemyNum].name}'s life: ${enemyInfo[enemyNum].life} health points
+      ${enemyInfo[enemyNum].name} have attacked you with ${enemyInfo[enemyNum].skill} for ${enemyInfo[enemyNum].attack} damage. --- ${playerInfo[0].name}'s life: ${playerInfo[0].life} health points`;
+    }
+  } else if (x == 0 && y == 1 && enemyInfo[2].livingStatus == 1) {
+    let enemyNum = 2;
+    enemyInfo[enemyNum].life = enemyInfo[enemyNum].life - playerInfo[0].attack;
+    playerInfo[0].life = playerInfo[0].life - enemyInfo[enemyNum].attack;
+    if (playerInfo[0].life <= 0) {
+      return `You have attacked ${enemyInfo[enemyNum].name} for ${playerInfo[0].attack} damage. --- ${enemyInfo[enemyNum].name}'s life: ${enemyInfo[enemyNum].life} health points
+      ${enemyInfo[enemyNum].name} have attacked you with ${enemyInfo[enemyNum].skill} for ${enemyInfo[enemyNum].attack} damage. --- ${playerInfo[0].name}'s life: ${playerInfo[0].life} health points
+      \n\u2605\u2605\u2605  You have been defeated by ${enemyInfo[enemyNum].name}.  \u2605\u2605\u2605
+      --- GAME OVER ---`;
+    }
+    if (enemyInfo[enemyNum].life <= 0) {
+      enemyInfo[enemyNum].livingStatus = enemyInfo[enemyNum].livingStatus - 1;
+      playerInfo[0].life = playerInfo[0].life + enemyInfo[enemyNum].attack;
+      playerInfo[0].gold = playerInfo[0].gold + enemyInfo[enemyNum].gold;
+      playerInfo[0].exp = playerInfo[0].exp + enemyInfo[enemyNum].exp;
+      return `You have attacked ${enemyInfo[enemyNum].name} for ${playerInfo[0].attack} damage. --- ${enemyInfo[enemyNum].name}'s life: 0 health points
+        \n\u2605\u2605\u2605  Victory! You have killed ${enemyInfo[enemyNum].name}. You have gained ${enemyInfo[enemyNum].gold} gold and ${enemyInfo[enemyNum].exp} experience. \u2605\u2605\u2605`;
+    } else {
+      return `You have attacked ${enemyInfo[enemyNum].name} for ${playerInfo[0].attack} damage. --- ${enemyInfo[enemyNum].name}'s life: ${enemyInfo[enemyNum].life} health points
+      ${enemyInfo[enemyNum].name} have attacked you with ${enemyInfo[enemyNum].skill} for ${enemyInfo[enemyNum].attack} damage. --- ${playerInfo[0].name}'s life: ${playerInfo[0].life} health points`;
+    }
+  } else if (x == 0 && y == -1 && enemyInfo[3].livingStatus == 1) {
+    let enemyNum = 3;
+    enemyInfo[enemyNum].life = enemyInfo[enemyNum].life - playerInfo[0].attack;
+    playerInfo[0].life = playerInfo[0].life - enemyInfo[enemyNum].attack;
+    if (playerInfo[0].life <= 0) {
+      return `You have attacked ${enemyInfo[enemyNum].name} for ${playerInfo[0].attack} damage. --- ${enemyInfo[enemyNum].name}'s life: ${enemyInfo[enemyNum].life} health points
+      ${enemyInfo[enemyNum].name} have attacked you with ${enemyInfo[enemyNum].skill} for ${enemyInfo[enemyNum].attack} damage. --- ${playerInfo[0].name}'s life: ${playerInfo[0].life} health points
+      \n\u2605\u2605\u2605  You have been defeated by ${enemyInfo[enemyNum].name}.  \u2605\u2605\u2605
+      --- GAME OVER ---`;
+    }
+    if (enemyInfo[enemyNum].life <= 0) {
+      enemyInfo[enemyNum].livingStatus = enemyInfo[enemyNum].livingStatus - 1;
+      playerInfo[0].life = playerInfo[0].life + enemyInfo[enemyNum].attack;
+      playerInfo[0].gold = playerInfo[0].gold + enemyInfo[enemyNum].gold;
+      playerInfo[0].exp = playerInfo[0].exp + enemyInfo[enemyNum].exp;
+      return `You have attacked ${enemyInfo[enemyNum].name} for ${playerInfo[0].attack} damage. --- ${enemyInfo[enemyNum].name}'s life: 0 health points
+        \n\u2605\u2605\u2605  Victory! You have killed ${enemyInfo[enemyNum].name}. You have gained ${enemyInfo[enemyNum].gold} gold and ${enemyInfo[enemyNum].exp} experience. \u2605\u2605\u2605`;
+    } else {
+      return `You have attacked ${enemyInfo[enemyNum].name} for ${playerInfo[0].attack} damage. --- ${enemyInfo[enemyNum].name}'s life: ${enemyInfo[enemyNum].life} health points
+      ${enemyInfo[enemyNum].name} have attacked you with ${enemyInfo[enemyNum].skill} for ${enemyInfo[enemyNum].attack} damage. --- ${playerInfo[0].name}'s life: ${playerInfo[0].life} health points`;
     }
   } else {
     return `There is nothing to attack here.`;
@@ -105,15 +173,24 @@ function observe() {
     You realize that those crystals are explosives in disguise. Mess with Yuna and you know you are going in a world of hurt.
       To restore your life points type /heal`;
   } else if (x == 1 && y == 0 && enemyInfo[0].livingStatus == 1) {
-    return `You see a zombie. The villagers at the top of their house sigh with relief. 
+    return `You see a Zombie. The villagers at the top of their house sigh with relief. 
     The zombie sees you. The zombie chases you. "Arrrrrggghhhh Brrraaaaiiiinssss" the zombie screams.`;
   } else if (x == -1 && y == 0 && enemyInfo[1].livingStatus == 1) {
-    return `You see a wild boar. It sees you and stopped attacking the villagers. 
+    return `You see a Wild Boar. It sees you and stopped attacking the villagers. 
     One of the villagers Kayne, shouts to you: "It is slow but hits hard. Give that beast a nice beating"`;
+  } else if (x == -0 && y == 1 && enemyInfo[2].livingStatus == 1) {
+    return `You see a Wild Spider. You tried to look at it's eyes but you can't. The spider has 8 eyes staring back at you.
+      Villagers will be meal soon. You must kill it!"`;
+  } else if (x == 0 && y == -1 && enemyInfo[3].livingStatus == 1) {
+    return `You see a Mutant Fox. This fox has been a pet of a villager and a lifelong friend of his.
+      But dark magic transformed the friendly fox into a fox of darkness. It has eaten several villagers. You know what you must do."`;
   } else if (
     x == -1 &&
     y == -1 &&
+    enemyInfo[0].livingStatus == 0 &&
     enemyInfo[1].livingStatus == 0 &&
+    enemyInfo[2].livingStatus == 0 &&
+    enemyInfo[3].livingStatus == 0 &&
     event[1] == 0
   ) {
     playerInfo[0].maxLife = playerInfo[0].maxLife + 20;
@@ -166,6 +243,7 @@ function heal() {
 function status() {
   return `Status:
   Name: ${playerInfo[0].name}
+  Weapon: ${playerInfo[0].weapon}
   Attack: ${playerInfo[0].attack}
   Life: ${playerInfo[0].life}/${playerInfo[0].maxLife}
   Gold: ${playerInfo[0].gold}
@@ -187,7 +265,7 @@ function poweroverwhelming() {
   if (cheatTrigger[0] === 0) {
     cheatTrigger[0]++;
     playerInfo[0].maxLife = playerInfo[0].maxLife + 100;
-    return `Cheat activated: Max life +100. Current Life: ${playerInfo[0].maxLife} health points.`;
+    return `\u2605\u2605\u2605  Cheat activated: Max life +100  \u2605\u2605\u2605       Current Life: ${playerInfo[0].maxLife} health points.`;
   } else {
     return `You cannot use this cheat again.`;
   }
@@ -210,7 +288,6 @@ Go forth Hero. And may the Great Spirit be with you.
 You open your eyes and now you are transported to the tutorial area. Your current position is (0,0).
 Type in /help to proceed`;
 }
-
 function west() {
   x--;
   if (x < -2) {
@@ -247,10 +324,18 @@ function east() {
     return `You are located at: (${x}, ${y})`;
   }
 }
+function teleport() {
+  x = 0;
+  y = 0;
+  return `\u2605\u2605\u2605  You have used a secret code  \u2605\u2605\u2605        You are back to the origin point. You are now located at: (${x}, ${y})`;
+}
 function location() {
   return `You are located at: (${x}, ${y})`;
 }
 
+app.get("/teleport", (request, response) => {
+  response.send(teleport());
+});
 app.get("/help", (request, response) => {
   response.send(help());
 });

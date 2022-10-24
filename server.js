@@ -11,11 +11,12 @@ let x = 0;
 let y = 0;
 let playerInfo = [
   {
-    name: `Unnamed Hero`,
+    name: `adventurer`,
     attack: 27,
     life: 100,
     maxLife: 100,
     gold: 100,
+    exp: 0,
   },
 ];
 let enemyInfo = [
@@ -24,21 +25,30 @@ let enemyInfo = [
     attack: 7,
     life: 100,
     livingStatus: 1,
+    gold: 50,
     relic: 1,
+    exp: 100,
+    skill: "Deadly Bite",
   },
   {
     name: "Wild Boar",
-    attack: 7,
+    attack: 8,
     life: 100,
     livingStatus: 1,
+    gold: 50,
     relic: 1,
+    exp: 100,
+    skill: "Tackle",
   },
   {
     name: "Wild Spider",
-    attack: 7,
+    attack: 9,
     life: 100,
     livingStatus: 1,
+    gold: 50,
     relic: 1,
+    exp: 100,
+    skill: "Web spin",
   },
   {
     name: "Tutorial Dungeon Master",
@@ -79,6 +89,7 @@ Go forth Hero. And may the Great Spirit be with you.
 You open your eyes and now you are transported to the tutorial area. Your current position is (0,0).
 Type in /help to proceed`;
 }
+
 function west() {
   x--;
   if (x < -2) {
@@ -118,13 +129,27 @@ function east() {
 function location() {
   return `You are located at: (${x}, ${y})`;
 }
+function encounterEnemy(enemyNum) {
+  console.log("Hello");
+}
 function attack() {
   if (x == 1 && y == 0 && enemyInfo[0].livingStatus == 1) {
     let enemyNum = 0;
     enemyInfo[enemyNum].life = enemyInfo[enemyNum].life - playerInfo[0].attack;
     playerInfo[0].life = playerInfo[0].life - enemyInfo[enemyNum].attack;
-    return `You have attacked ${enemyInfo[enemyNum].name} for ${playerInfo[0].attack} damage. ${enemyInfo[enemyNum].name}'s life: ${enemyInfo[enemyNum].life} health points
-    ${enemyInfo[enemyNum].name} have attacked you for ${enemyInfo[enemyNum].attack} damage. ${playerInfo[0].name}'s life: ${playerInfo[0].life} health points`;
+    if (enemyInfo[enemyNum].life <= 0) {
+      enemyInfo[enemyNum].livingStatus = enemyInfo[enemyNum].livingStatus - 1;
+      playerInfo[0].life = playerInfo[0].life + enemyInfo[enemyNum].attack;
+      playerInfo[0].gold = playerInfo[0].gold + enemyInfo[enemyNum].gold;
+      playerInfo[0].exp = playerInfo[0].exp + enemyInfo[enemyNum].exp;
+      return `You have attacked ${enemyInfo[enemyNum].name} for ${playerInfo[0].attack} damage. ${enemyInfo[enemyNum].name}'s life: 0 health points
+        \n\u2605\u2605\u2605  Victory! You have killed ${enemyInfo[enemyNum].name}. You have gained ${enemyInfo[enemyNum].gold} gold and ${enemyInfo[enemyNum].exp} experience. \u2605\u2605\u2605`;
+    } else {
+      return `You have attacked ${enemyInfo[enemyNum].name} for ${playerInfo[0].attack} damage. ${enemyInfo[enemyNum].name}'s life: ${enemyInfo[enemyNum].life} health points
+      ${enemyInfo[enemyNum].name} have attacked you for ${enemyInfo[enemyNum].attack} damage. ${playerInfo[0].name}'s life: ${playerInfo[0].life} health points`;
+    }
+  } else {
+    return `There is nothing to attack here.`;
   }
 }
 function observe() {
@@ -168,7 +193,7 @@ function talk() {
 function heal() {
   if (x == 1 && y == 1) {
     playerInfo[0].life = playerInfo[0].maxLife;
-    return `Yuna, the Healer: Hello adventurer! Free heals for you.
+    return `Yuna, the Healer: Hello ${playerInfo[0].name}! Free heals for you.
     Your health has been restored to full.     You're current life points is now: ${playerInfo[0].life}`;
   } else {
     return `You are at (${x}, ${y}). This is not the place for you to get healed.`;
@@ -178,7 +203,9 @@ function status() {
   return `Status:
   Name: ${playerInfo[0].name}
   Attack: ${playerInfo[0].attack}
-  Life: ${playerInfo[0].life}/${playerInfo[0].maxLife}`;
+  Life: ${playerInfo[0].life}/${playerInfo[0].maxLife}
+  Gold: ${playerInfo[0].gold}
+  Experience: ${playerInfo[0].exp}`;
 }
 function help() {
   return `Instructions: To move, type [/w] North, [/s] South, [/a] West, or [/d] East then press Enter.

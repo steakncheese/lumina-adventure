@@ -100,9 +100,9 @@ function attack() {
     enemyInfo[enemyNum].life = enemyInfo[enemyNum].life - playerInfo[0].attack;
     playerInfo[0].life = playerInfo[0].life - enemyInfo[enemyNum].attack;
     if (playerInfo[0].life <= 0) {
-      return `You have attacked ${enemyInfo[enemyNum].name} for ${playerInfo[0].attack} damage. --- ${enemyInfo[enemyNum].name}'s life: ${enemyInfo[enemyNum].life} health points
-      ${enemyInfo[enemyNum].name} have attacked you with ${enemyInfo[enemyNum].skill} for ${enemyInfo[enemyNum].attack} damage. --- ${playerInfo[0].name}'s life: ${playerInfo[0].life} health points
-      \n\u2605\u2605\u2605  You have been defeated by ${enemyInfo[enemyNum].name}.  \u2605\u2605\u2605
+      return `\n\x1b[92mYou\x1b[0m have attacked \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m for \x1b[31m${playerInfo[0].attack}\x1b[0m damage. --- \x1b[35m${enemyInfo[enemyNum].name}'s life:\x1b[0m \x1b[33m${enemyInfo[enemyNum].life}\x1b[0m health points
+        \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m have attacked \x1b[92myou\x1b[0m with \x1b[36m${enemyInfo[enemyNum].skill}\x1b[0m for \x1b[31m${enemyInfo[enemyNum].attack}\x1b[0m damage. --- \x1b[92m${playerInfo[0].name}'s life:\x1b[0m \x1b[33m0\x1b[0m health points
+      \n\x1b[31m\u2605\u2605\u2605  You have been defeated by ${enemyInfo[enemyNum].name}.  \u2605\u2605\u2605\x1b[0m
       --- GAME OVER ---`;
     }
     if (enemyInfo[enemyNum].life <= 0) {
@@ -110,21 +110,21 @@ function attack() {
       playerInfo[0].life = playerInfo[0].life + enemyInfo[enemyNum].attack;
       playerInfo[0].gold = playerInfo[0].gold + enemyInfo[enemyNum].gold;
       playerInfo[0].exp = playerInfo[0].exp + enemyInfo[enemyNum].exp;
-      return `You have attacked ${enemyInfo[enemyNum].name} for ${playerInfo[0].attack} damage. --- ${enemyInfo[enemyNum].name}'s life: 0 health points
-        \n\u2605\u2605\u2605  Victory! You have killed ${enemyInfo[enemyNum].name}. You have gained ${enemyInfo[enemyNum].gold} gold and ${enemyInfo[enemyNum].exp} experience. \u2605\u2605\u2605
+      return `\n\x1b[92mYou\x1b[0m have attacked \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m for \x1b[31m${playerInfo[0].attack}\x1b[0m damage. --- \x1b[35m${enemyInfo[enemyNum].name}'s life:\x1b[0m 0 health points
+        \n\x1b[33m\u2605\u2605\u2605  Victory! You have killed ${enemyInfo[enemyNum].name}. You have gained ${enemyInfo[enemyNum].gold} gold and ${enemyInfo[enemyNum].exp} experience. \u2605\u2605\u2605\x1b[0m
         The village elder Ran tells you that her house is just located south at (-1,-1). Kill all the monsters surrounding the starting location to get a reward.`;
     } else {
-      return `You have attacked ${enemyInfo[enemyNum].name} for ${playerInfo[0].attack} damage. --- ${enemyInfo[enemyNum].name}'s life: ${enemyInfo[enemyNum].life} health points
-      ${enemyInfo[enemyNum].name} have attacked you with ${enemyInfo[enemyNum].skill} for ${enemyInfo[enemyNum].attack} damage. --- ${playerInfo[0].name}'s life: ${playerInfo[0].life} health points`;
+      return `\n\x1b[92mYou\x1b[0m have attacked \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m for \x1b[31m${playerInfo[0].attack}\x1b[0m damage. --- \x1b[35m${enemyInfo[enemyNum].name}'s life:\x1b[0m \x1b[33m${enemyInfo[enemyNum].life}\x1b[0m health points
+        \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m have attacked \x1b[92myou\x1b[0m with \x1b[36m${enemyInfo[enemyNum].skill}\x1b[0m for \x1b[31m${enemyInfo[enemyNum].attack}\x1b[0m damage. --- \x1b[92m${playerInfo[0].name}'s life:\x1b[0m \x1b[33m${playerInfo[0].life}\x1b[0m health points\n`;
     }
   } else if (x == 0 && y == 1 && enemyInfo[2].livingStatus == 1) {
     let enemyNum = 2;
     enemyInfo[enemyNum].life = enemyInfo[enemyNum].life - playerInfo[0].attack;
     playerInfo[0].life = playerInfo[0].life - enemyInfo[enemyNum].attack;
     if (playerInfo[0].life <= 0) {
-      return `You have attacked ${enemyInfo[enemyNum].name} for ${playerInfo[0].attack} damage. --- ${enemyInfo[enemyNum].name}'s life: ${enemyInfo[enemyNum].life} health points
-      ${enemyInfo[enemyNum].name} have attacked you with ${enemyInfo[enemyNum].skill} for ${enemyInfo[enemyNum].attack} damage. --- ${playerInfo[0].name}'s life: ${playerInfo[0].life} health points
-      \n\u2605\u2605\u2605  You have been defeated by ${enemyInfo[enemyNum].name}.  \u2605\u2605\u2605
+      return `\n\x1b[92mYou\x1b[0m have attacked \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m for \x1b[31m${playerInfo[0].attack}\x1b[0m damage. --- \x1b[35m${enemyInfo[enemyNum].name}'s life:\x1b[0m \x1b[33m${enemyInfo[enemyNum].life}\x1b[0m health points
+        \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m have attacked \x1b[92myou\x1b[0m with \x1b[36m${enemyInfo[enemyNum].skill}\x1b[0m for \x1b[31m${enemyInfo[enemyNum].attack}\x1b[0m damage. --- \x1b[92m${playerInfo[0].name}'s life:\x1b[0m \x1b[33m0\x1b[0m health points
+      \n\x1b[31m\u2605\u2605\u2605  You have been defeated by ${enemyInfo[enemyNum].name}.  \u2605\u2605\u2605\x1b[0m
       --- GAME OVER ---`;
     }
     if (enemyInfo[enemyNum].life <= 0) {
@@ -132,20 +132,20 @@ function attack() {
       playerInfo[0].life = playerInfo[0].life + enemyInfo[enemyNum].attack;
       playerInfo[0].gold = playerInfo[0].gold + enemyInfo[enemyNum].gold;
       playerInfo[0].exp = playerInfo[0].exp + enemyInfo[enemyNum].exp;
-      return `You have attacked ${enemyInfo[enemyNum].name} for ${playerInfo[0].attack} damage. --- ${enemyInfo[enemyNum].name}'s life: 0 health points
-        \n\u2605\u2605\u2605  Victory! You have killed ${enemyInfo[enemyNum].name}. You have gained ${enemyInfo[enemyNum].gold} gold and ${enemyInfo[enemyNum].exp} experience. \u2605\u2605\u2605`;
+      return `\n\x1b[92mYou\x1b[0m have attacked \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m for \x1b[31m${playerInfo[0].attack}\x1b[0m damage. --- \x1b[35m${enemyInfo[enemyNum].name}'s life:\x1b[0m 0 health points
+        \n\x1b[33m\u2605\u2605\u2605  Victory! You have killed ${enemyInfo[enemyNum].name}. You have gained ${enemyInfo[enemyNum].gold} gold and ${enemyInfo[enemyNum].exp} experience. \u2605\u2605\u2605\x1b[0m`;
     } else {
-      return `You have attacked ${enemyInfo[enemyNum].name} for ${playerInfo[0].attack} damage. --- ${enemyInfo[enemyNum].name}'s life: ${enemyInfo[enemyNum].life} health points
-      ${enemyInfo[enemyNum].name} have attacked you with ${enemyInfo[enemyNum].skill} for ${enemyInfo[enemyNum].attack} damage. --- ${playerInfo[0].name}'s life: ${playerInfo[0].life} health points`;
+      return `\n\x1b[92mYou\x1b[0m have attacked \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m for \x1b[31m${playerInfo[0].attack}\x1b[0m damage. --- \x1b[35m${enemyInfo[enemyNum].name}'s life:\x1b[0m \x1b[33m${enemyInfo[enemyNum].life}\x1b[0m health points
+        \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m have attacked \x1b[92myou\x1b[0m with \x1b[36m${enemyInfo[enemyNum].skill}\x1b[0m for \x1b[31m${enemyInfo[enemyNum].attack}\x1b[0m damage. --- \x1b[92m${playerInfo[0].name}'s life:\x1b[0m \x1b[33m${playerInfo[0].life}\x1b[0m health points\n`;
     }
   } else if (x == 0 && y == -1 && enemyInfo[3].livingStatus == 1) {
     let enemyNum = 3;
     enemyInfo[enemyNum].life = enemyInfo[enemyNum].life - playerInfo[0].attack;
     playerInfo[0].life = playerInfo[0].life - enemyInfo[enemyNum].attack;
     if (playerInfo[0].life <= 0) {
-      return `You have attacked ${enemyInfo[enemyNum].name} for ${playerInfo[0].attack} damage. --- ${enemyInfo[enemyNum].name}'s life: ${enemyInfo[enemyNum].life} health points
-      ${enemyInfo[enemyNum].name} have attacked you with ${enemyInfo[enemyNum].skill} for ${enemyInfo[enemyNum].attack} damage. --- ${playerInfo[0].name}'s life: ${playerInfo[0].life} health points
-      \n\u2605\u2605\u2605  You have been defeated by ${enemyInfo[enemyNum].name}.  \u2605\u2605\u2605
+      return `\n\x1b[92mYou\x1b[0m have attacked \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m for \x1b[31m${playerInfo[0].attack}\x1b[0m damage. --- \x1b[35m${enemyInfo[enemyNum].name}'s life:\x1b[0m \x1b[33m${enemyInfo[enemyNum].life}\x1b[0m health points
+        \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m have attacked \x1b[92myou\x1b[0m with \x1b[36m${enemyInfo[enemyNum].skill}\x1b[0m for \x1b[31m${enemyInfo[enemyNum].attack}\x1b[0m damage. --- \x1b[92m${playerInfo[0].name}'s life:\x1b[0m \x1b[33m0\x1b[0m health points
+      \n\x1b[31m\u2605\u2605\u2605  You have been defeated by ${enemyInfo[enemyNum].name}.  \u2605\u2605\u2605\x1b[0m
       --- GAME OVER ---`;
     }
     if (enemyInfo[enemyNum].life <= 0) {
@@ -153,11 +153,11 @@ function attack() {
       playerInfo[0].life = playerInfo[0].life + enemyInfo[enemyNum].attack;
       playerInfo[0].gold = playerInfo[0].gold + enemyInfo[enemyNum].gold;
       playerInfo[0].exp = playerInfo[0].exp + enemyInfo[enemyNum].exp;
-      return `You have attacked ${enemyInfo[enemyNum].name} for ${playerInfo[0].attack} damage. --- ${enemyInfo[enemyNum].name}'s life: 0 health points
-        \n\u2605\u2605\u2605  Victory! You have killed ${enemyInfo[enemyNum].name}. You have gained ${enemyInfo[enemyNum].gold} gold and ${enemyInfo[enemyNum].exp} experience. \u2605\u2605\u2605`;
+      return `\n\x1b[92mYou\x1b[0m have attacked \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m for \x1b[31m${playerInfo[0].attack}\x1b[0m damage. --- \x1b[35m${enemyInfo[enemyNum].name}'s life:\x1b[0m 0 health points
+        \n\x1b[33m\u2605\u2605\u2605  Victory! You have killed ${enemyInfo[enemyNum].name}. You have gained ${enemyInfo[enemyNum].gold} gold and ${enemyInfo[enemyNum].exp} experience. \u2605\u2605\u2605\x1b[0m`;
     } else {
-      return `You have attacked ${enemyInfo[enemyNum].name} for ${playerInfo[0].attack} damage. --- ${enemyInfo[enemyNum].name}'s life: ${enemyInfo[enemyNum].life} health points
-      ${enemyInfo[enemyNum].name} have attacked you with ${enemyInfo[enemyNum].skill} for ${enemyInfo[enemyNum].attack} damage. --- ${playerInfo[0].name}'s life: ${playerInfo[0].life} health points`;
+      return `\n\x1b[92mYou\x1b[0m have attacked \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m for \x1b[31m${playerInfo[0].attack}\x1b[0m damage. --- \x1b[35m${enemyInfo[enemyNum].name}'s life:\x1b[0m \x1b[33m${enemyInfo[enemyNum].life}\x1b[0m health points
+        \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m have attacked \x1b[92myou\x1b[0m with \x1b[36m${enemyInfo[enemyNum].skill}\x1b[0m for \x1b[31m${enemyInfo[enemyNum].attack}\x1b[0m damage. --- \x1b[92m${playerInfo[0].name}'s life:\x1b[0m \x1b[33m${playerInfo[0].life}\x1b[0m health points\n`;
     }
   } else {
     return `There is nothing to attack here.`;
@@ -250,11 +250,11 @@ function status() {
   Experience: ${playerInfo[0].exp}`;
 }
 function help() {
-  return `Instructions: To move, type [/w] North, [/s] South, [/a] West, or [/d] East then press Enter.
-  To see info on current location: /o or /observe *** Reccomendation: use in every tile you go ***
-  To see where you are located: /location
-  To attack an enemy: /k
-  The other things you must learn as you go. For it is by fire that gold is made.`;
+  return `\n\x1b[33mInstructions:\x1b[0m To move, type \x1b[36m/w\x1b[0m North, \x1b[36m/s\x1b[0m South, \x1b[36m/a\x1b[0m West, or \x1b[36m/d\x1b[0m East then press Enter.
+  To see info on current location: \x1b[36m/o\x1b[0m or \x1b[36m/observe\x1b[0m *** \x1b[33mRecommendation:\x1b[0m Use \x1b[33m/o\x1b[0m in every tile you go ***
+  To see where you are located: \x1b[36m/l\x1b[0m or \x1b[36m/location\x1b[0m
+  To attack an enemy: \x1b[36m/k\x1b[0m or \x1b[36m/attack\x1b[0m
+    The other things you must learn as you go. For it is by \x1b[31mfire\x1b[0m that \x1b[33mgold\x1b[0m is made.\n`;
 }
 function askPlayerName() {
   // playerInfo[0].name = rl.question(`What is your name hero?`);
@@ -271,57 +271,57 @@ function poweroverwhelming() {
   }
 }
 function welcome() {
+  // texteditor.com
   return `
-▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+\x1b[92m▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
 █▄▄░▄▄█░██░█▄░▄█▀▄▄▀█░▄▄▀██▄██░▄▄▀█░████▀▀███▄▄░▄▄█░████░▄▄████░▄▄░█░▄▄▀█░▄▀▄░█░▄▄
 ███░███░██░██░██░██░█░▀▀▄██░▄█░▀▀░█░████▀▀█████░███░▄▄░█░▄▄████░█▀▀█░▀▀░█░█▄█░█░▄▄
 ███░████▄▄▄██▄███▄▄██▄█▄▄█▄▄▄█▄██▄█▄▄██████████░███▄██▄█▄▄▄████░▀▀▄█▄██▄█▄███▄█▄▄▄
-▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
-; // texteditor.com
+▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀\x1b[0m
+\x1b[33mWelcome to Tutorial Area!!!\x1b[0m
 
-Welcome to Tutorial Area.
+  \x1b[92mOracle:\x1b[0m You have been summoned to protect the Kingdom of Lumina but have to prove yourself worthy of the power of Hero.
+          Go forth Hero. And may the Great Spirit be with you.
 
-Oracle: You have been summoned to protect the Kingdom of Lumina but have to prove youself worthy of the power of Hero.
+You open your eyes and now you are transported to the tutorial area. Your current position is \x1b[33m(0,0)\x1b[0m.
 
-Go forth Hero. And may the Great Spirit be with you.
-
-You open your eyes and now you are transported to the tutorial area. Your current position is (0,0).
-Type in /help to proceed`;
+          \x1b[92m\u2605\u2605\u2605\x1b[0m  Type in \x1b[36m/help\x1b[0m to proceed  \x1b[92m\u2605\u2605\u2605\x1b[0m 
+            `;
 }
 function west() {
   x--;
   if (x < -2) {
     x++;
-    return `You cannot go there. You are back at (${x}, ${y})`;
+    return `You cannot go there. You are back at \x1b[33m(${x}, ${y})\x1b[0m`;
   } else {
-    return `You are located at: (${x}, ${y})`;
+    return `You are located at: \x1b[33m(${x}, ${y})\x1b[0m`;
   }
 }
 function north() {
   y++;
   if (y > 2) {
     y--;
-    return `You cannot go there. You are back at (${x}, ${y})`;
+    return `You cannot go there. You are back at \x1b[33m(${x}, ${y})\x1b[0m`;
   } else {
-    return `You are located at: (${x}, ${y})`;
+    return `You are located at: \x1b[33m(${x}, ${y})\x1b[0m`;
   }
 }
 function south() {
   y--;
   if (y < -2) {
     y++;
-    return `You cannot go there. You are back at (${x}, ${y})`;
+    return `You cannot go there. You are back at \x1b[33m(${x}, ${y})\x1b[0m`;
   } else {
-    return `You are located at: (${x}, ${y})`;
+    return `You are located at: \x1b[33m(${x}, ${y})\x1b[0m`;
   }
 }
 function east() {
   x++;
   if (x > 2) {
     x--;
-    return `You cannot go there. You are back at (${x}, ${y})`;
+    return `You cannot go there. You are back at "\x1b[33m(${x}, ${y})\x1b[0m`;
   } else {
-    return `You are located at: (${x}, ${y})`;
+    return `You are located at: "\x1b[33m(${x}, ${y})\x1b[0m`;
   }
 }
 function teleport() {
@@ -330,7 +330,7 @@ function teleport() {
   return `\u2605\u2605\u2605  You have used a secret code  \u2605\u2605\u2605        You are back to the origin point. You are now located at: (${x}, ${y})`;
 }
 function location() {
-  return `You are located at: (${x}, ${y})`;
+  return `\x1b[33mYou are located at: (${x}, ${y})\x1b[0m`;
 }
 
 app.get("/teleport", (request, response) => {
@@ -343,6 +343,9 @@ app.get("/heal", (request, response) => {
   response.send(heal());
 });
 app.get("/attack", (request, response) => {
+  response.send(attack());
+});
+app.get("/k", (request, response) => {
   response.send(attack());
 });
 app.get("/", (request, response) => {
@@ -370,6 +373,9 @@ app.get("/give", (request, response) => {
   response.send(give());
 });
 app.get("/location", (request, response) => {
+  response.send(location());
+});
+app.get("/l", (request, response) => {
   response.send(location());
 });
 app.get("/status", (request, response) => {

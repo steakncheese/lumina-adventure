@@ -93,7 +93,7 @@ let enemyInfo = [
     attack: 8,
     life: 100,
     livingStatus: 1,
-    gold: 50,
+    gold: 150,
     relic: 1,
     exp: 100,
     skill: "Hydro Blast",
@@ -111,7 +111,7 @@ let enemyInfo = [
   },
   {
     name: "Iron Giant",
-    // id: 07,
+    // id: 08,
     attack: 22,
     life: 200,
     livingStatus: 1,
@@ -121,8 +121,8 @@ let enemyInfo = [
     skill: "Giant Smash!",
   },
   {
-    name: "Water",
-    // id: 07,
+    name: "Water Dragon",
+    // id: 09,
     attack: 23,
     life: 190,
     livingStatus: 1,
@@ -225,17 +225,143 @@ function attack() {
       return `\n\x1b[92mYou\x1b[0m have attacked \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m for \x1b[31m${playerInfo[0].attack}\x1b[0m damage. --- \x1b[35m${enemyInfo[enemyNum].name}'s life:\x1b[0m \x1b[33m${enemyInfo[enemyNum].life}\x1b[0m health points
         \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m have attacked \x1b[92myou\x1b[0m with \x1b[36m${enemyInfo[enemyNum].skill}\x1b[0m for \x1b[31m${enemyInfo[enemyNum].attack}\x1b[0m damage. --- \x1b[92m${playerInfo[0].name}'s life:\x1b[0m \x1b[33m${playerInfo[0].life}\x1b[0m health points\n`;
     }
+  } else if (x == -2 && y == 0 && enemyInfo[4].livingStatus == 1) {
+    let enemyNum = 4;
+    enemyInfo[enemyNum].life = enemyInfo[enemyNum].life - playerInfo[0].attack;
+    playerInfo[0].life = playerInfo[0].life - enemyInfo[enemyNum].attack;
+    if (playerInfo[0].life <= 0) {
+      return `\n\x1b[92mYou\x1b[0m have attacked \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m for \x1b[31m${playerInfo[0].attack}\x1b[0m damage. --- \x1b[35m${enemyInfo[enemyNum].name}'s life:\x1b[0m \x1b[33m${enemyInfo[enemyNum].life}\x1b[0m health points
+        \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m have attacked \x1b[92myou\x1b[0m with \x1b[36m${enemyInfo[enemyNum].skill}\x1b[0m for \x1b[31m${enemyInfo[enemyNum].attack}\x1b[0m damage. --- \x1b[92m${playerInfo[0].name}'s life:\x1b[0m \x1b[33m0\x1b[0m health points
+      \n\x1b[31m\u2605\u2605\u2605  You have been defeated by ${enemyInfo[enemyNum].name}.  \u2605\u2605\u2605\x1b[0m
+      --- GAME OVER ---`;
+    }
+    if (enemyInfo[enemyNum].life <= 0) {
+      enemyInfo[enemyNum].livingStatus = enemyInfo[enemyNum].livingStatus - 1;
+      playerInfo[0].life = playerInfo[0].life + enemyInfo[enemyNum].attack;
+      playerInfo[0].gold = playerInfo[0].gold + enemyInfo[enemyNum].gold;
+      playerInfo[0].exp = playerInfo[0].exp + enemyInfo[enemyNum].exp;
+      return `\n\x1b[92mYou\x1b[0m have attacked \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m for \x1b[31m${playerInfo[0].attack}\x1b[0m damage. --- \x1b[35m${enemyInfo[enemyNum].name}'s life:\x1b[0m 0 health points
+        \n\x1b[33m\u2605\u2605\u2605  Victory! You have killed ${enemyInfo[enemyNum].name}. You have gained ${enemyInfo[enemyNum].gold} gold and ${enemyInfo[enemyNum].exp} experience. \u2605\u2605\u2605\x1b[0m`;
+    } else {
+      return `\n\x1b[92mYou\x1b[0m have attacked \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m for \x1b[31m${playerInfo[0].attack}\x1b[0m damage. --- \x1b[35m${enemyInfo[enemyNum].name}'s life:\x1b[0m \x1b[33m${enemyInfo[enemyNum].life}\x1b[0m health points
+        \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m have attacked \x1b[92myou\x1b[0m with \x1b[36m${enemyInfo[enemyNum].skill}\x1b[0m for \x1b[31m${enemyInfo[enemyNum].attack}\x1b[0m damage. --- \x1b[92m${playerInfo[0].name}'s life:\x1b[0m \x1b[33m${playerInfo[0].life}\x1b[0m health points\n`;
+    }
+  } else if (x == -1 && y == 1 && enemyInfo[5].livingStatus == 1) {
+    let enemyNum = 5;
+    enemyInfo[enemyNum].life = enemyInfo[enemyNum].life - playerInfo[0].attack;
+    playerInfo[0].life = playerInfo[0].life - enemyInfo[enemyNum].attack;
+    if (playerInfo[0].life <= 0) {
+      return `\n\x1b[92mYou\x1b[0m have attacked \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m for \x1b[31m${playerInfo[0].attack}\x1b[0m damage. --- \x1b[35m${enemyInfo[enemyNum].name}'s life:\x1b[0m \x1b[33m${enemyInfo[enemyNum].life}\x1b[0m health points
+        \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m have attacked \x1b[92myou\x1b[0m with \x1b[36m${enemyInfo[enemyNum].skill}\x1b[0m for \x1b[31m${enemyInfo[enemyNum].attack}\x1b[0m damage. --- \x1b[92m${playerInfo[0].name}'s life:\x1b[0m \x1b[33m0\x1b[0m health points
+      \n\x1b[31m\u2605\u2605\u2605  You have been defeated by ${enemyInfo[enemyNum].name}.  \u2605\u2605\u2605\x1b[0m
+      --- GAME OVER ---`;
+    }
+    if (enemyInfo[enemyNum].life <= 0) {
+      enemyInfo[enemyNum].livingStatus = enemyInfo[enemyNum].livingStatus - 1;
+      playerInfo[0].life = playerInfo[0].life + enemyInfo[enemyNum].attack;
+      playerInfo[0].gold = playerInfo[0].gold + enemyInfo[enemyNum].gold;
+      playerInfo[0].exp = playerInfo[0].exp + enemyInfo[enemyNum].exp;
+      return `\n\x1b[92mYou\x1b[0m have attacked \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m for \x1b[31m${playerInfo[0].attack}\x1b[0m damage. --- \x1b[35m${enemyInfo[enemyNum].name}'s life:\x1b[0m 0 health points
+        \n\x1b[33m\u2605\u2605\u2605  Victory! You have killed ${enemyInfo[enemyNum].name}. You have gained ${enemyInfo[enemyNum].gold} gold and ${enemyInfo[enemyNum].exp} experience. \u2605\u2605\u2605\x1b[0m`;
+    } else {
+      return `\n\x1b[92mYou\x1b[0m have attacked \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m for \x1b[31m${playerInfo[0].attack}\x1b[0m damage. --- \x1b[35m${enemyInfo[enemyNum].name}'s life:\x1b[0m \x1b[33m${enemyInfo[enemyNum].life}\x1b[0m health points
+        \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m have attacked \x1b[92myou\x1b[0m with \x1b[36m${enemyInfo[enemyNum].skill}\x1b[0m for \x1b[31m${enemyInfo[enemyNum].attack}\x1b[0m damage. --- \x1b[92m${playerInfo[0].name}'s life:\x1b[0m \x1b[33m${playerInfo[0].life}\x1b[0m health points\n`;
+    }
+  } else if (x == 1 && y == -1 && enemyInfo[6].livingStatus == 1) {
+    let enemyNum = 6;
+    enemyInfo[enemyNum].life = enemyInfo[enemyNum].life - playerInfo[0].attack;
+    playerInfo[0].life = playerInfo[0].life - enemyInfo[enemyNum].attack;
+    if (playerInfo[0].life <= 0) {
+      return `\n\x1b[92mYou\x1b[0m have attacked \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m for \x1b[31m${playerInfo[0].attack}\x1b[0m damage. --- \x1b[35m${enemyInfo[enemyNum].name}'s life:\x1b[0m \x1b[33m${enemyInfo[enemyNum].life}\x1b[0m health points
+        \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m have attacked \x1b[92myou\x1b[0m with \x1b[36m${enemyInfo[enemyNum].skill}\x1b[0m for \x1b[31m${enemyInfo[enemyNum].attack}\x1b[0m damage. --- \x1b[92m${playerInfo[0].name}'s life:\x1b[0m \x1b[33m0\x1b[0m health points
+      \n\x1b[31m\u2605\u2605\u2605  You have been defeated by ${enemyInfo[enemyNum].name}.  \u2605\u2605\u2605\x1b[0m
+      --- GAME OVER ---`;
+    }
+    if (enemyInfo[enemyNum].life <= 0) {
+      enemyInfo[enemyNum].livingStatus = enemyInfo[enemyNum].livingStatus - 1;
+      playerInfo[0].life = playerInfo[0].life + enemyInfo[enemyNum].attack;
+      playerInfo[0].gold = playerInfo[0].gold + enemyInfo[enemyNum].gold;
+      playerInfo[0].exp = playerInfo[0].exp + enemyInfo[enemyNum].exp;
+      return `\n\x1b[92mYou\x1b[0m have attacked \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m for \x1b[31m${playerInfo[0].attack}\x1b[0m damage. --- \x1b[35m${enemyInfo[enemyNum].name}'s life:\x1b[0m 0 health points
+        \n\x1b[33m\u2605\u2605\u2605  Victory! You have killed ${enemyInfo[enemyNum].name}. You have gained ${enemyInfo[enemyNum].gold} gold and ${enemyInfo[enemyNum].exp} experience. \u2605\u2605\u2605\x1b[0m`;
+    } else {
+      return `\n\x1b[92mYou\x1b[0m have attacked \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m for \x1b[31m${playerInfo[0].attack}\x1b[0m damage. --- \x1b[35m${enemyInfo[enemyNum].name}'s life:\x1b[0m \x1b[33m${enemyInfo[enemyNum].life}\x1b[0m health points
+        \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m have attacked \x1b[92myou\x1b[0m with \x1b[36m${enemyInfo[enemyNum].skill}\x1b[0m for \x1b[31m${enemyInfo[enemyNum].attack}\x1b[0m damage. --- \x1b[92m${playerInfo[0].name}'s life:\x1b[0m \x1b[33m${playerInfo[0].life}\x1b[0m health points\n`;
+    }
+  } else if (x == 2 && y == 0 && enemyInfo[7].livingStatus == 1) {
+    let enemyNum = 7;
+    enemyInfo[enemyNum].life = enemyInfo[enemyNum].life - playerInfo[0].attack;
+    playerInfo[0].life = playerInfo[0].life - enemyInfo[enemyNum].attack;
+    if (playerInfo[0].life <= 0) {
+      return `\n\x1b[92mYou\x1b[0m have attacked \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m for \x1b[31m${playerInfo[0].attack}\x1b[0m damage. --- \x1b[35m${enemyInfo[enemyNum].name}'s life:\x1b[0m \x1b[33m${enemyInfo[enemyNum].life}\x1b[0m health points
+        \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m have attacked \x1b[92myou\x1b[0m with \x1b[36m${enemyInfo[enemyNum].skill}\x1b[0m for \x1b[31m${enemyInfo[enemyNum].attack}\x1b[0m damage. --- \x1b[92m${playerInfo[0].name}'s life:\x1b[0m \x1b[33m0\x1b[0m health points
+      \n\x1b[31m\u2605\u2605\u2605  You have been defeated by ${enemyInfo[enemyNum].name}.  \u2605\u2605\u2605\x1b[0m
+      --- GAME OVER ---`;
+    }
+    if (enemyInfo[enemyNum].life <= 0) {
+      enemyInfo[enemyNum].livingStatus = enemyInfo[enemyNum].livingStatus - 1;
+      playerInfo[0].life = playerInfo[0].life + enemyInfo[enemyNum].attack;
+      playerInfo[0].gold = playerInfo[0].gold + enemyInfo[enemyNum].gold;
+      playerInfo[0].exp = playerInfo[0].exp + enemyInfo[enemyNum].exp;
+      return `\n\x1b[92mYou\x1b[0m have attacked \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m for \x1b[31m${playerInfo[0].attack}\x1b[0m damage. --- \x1b[35m${enemyInfo[enemyNum].name}'s life:\x1b[0m 0 health points
+        \n\x1b[33m\u2605\u2605\u2605  Victory! You have killed ${enemyInfo[enemyNum].name}. You have gained ${enemyInfo[enemyNum].gold} gold and ${enemyInfo[enemyNum].exp} experience. \u2605\u2605\u2605\x1b[0m`;
+    } else {
+      return `\n\x1b[92mYou\x1b[0m have attacked \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m for \x1b[31m${playerInfo[0].attack}\x1b[0m damage. --- \x1b[35m${enemyInfo[enemyNum].name}'s life:\x1b[0m \x1b[33m${enemyInfo[enemyNum].life}\x1b[0m health points
+        \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m have attacked \x1b[92myou\x1b[0m with \x1b[36m${enemyInfo[enemyNum].skill}\x1b[0m for \x1b[31m${enemyInfo[enemyNum].attack}\x1b[0m damage. --- \x1b[92m${playerInfo[0].name}'s life:\x1b[0m \x1b[33m${playerInfo[0].life}\x1b[0m health points\n`;
+    }
+  } else if (x == 2 && y == 1 && enemyInfo[8].livingStatus == 1) {
+    let enemyNum = 8;
+    enemyInfo[enemyNum].life = enemyInfo[enemyNum].life - playerInfo[0].attack;
+    playerInfo[0].life = playerInfo[0].life - enemyInfo[enemyNum].attack;
+    if (playerInfo[0].life <= 0) {
+      return `\n\x1b[92mYou\x1b[0m have attacked \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m for \x1b[31m${playerInfo[0].attack}\x1b[0m damage. --- \x1b[35m${enemyInfo[enemyNum].name}'s life:\x1b[0m \x1b[33m${enemyInfo[enemyNum].life}\x1b[0m health points
+        \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m have attacked \x1b[92myou\x1b[0m with \x1b[36m${enemyInfo[enemyNum].skill}\x1b[0m for \x1b[31m${enemyInfo[enemyNum].attack}\x1b[0m damage. --- \x1b[92m${playerInfo[0].name}'s life:\x1b[0m \x1b[33m0\x1b[0m health points
+      \n\x1b[31m\u2605\u2605\u2605  You have been defeated by ${enemyInfo[enemyNum].name}.  \u2605\u2605\u2605\x1b[0m
+      --- GAME OVER ---`;
+    }
+    if (enemyInfo[enemyNum].life <= 0) {
+      enemyInfo[enemyNum].livingStatus = enemyInfo[enemyNum].livingStatus - 1;
+      playerInfo[0].life = playerInfo[0].life + enemyInfo[enemyNum].attack;
+      playerInfo[0].gold = playerInfo[0].gold + enemyInfo[enemyNum].gold;
+      playerInfo[0].exp = playerInfo[0].exp + enemyInfo[enemyNum].exp;
+      return `\n\x1b[92mYou\x1b[0m have attacked \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m for \x1b[31m${playerInfo[0].attack}\x1b[0m damage. --- \x1b[35m${enemyInfo[enemyNum].name}'s life:\x1b[0m 0 health points
+        \n\x1b[33m\u2605\u2605\u2605  Victory! You have killed ${enemyInfo[enemyNum].name}. You have gained ${enemyInfo[enemyNum].gold} gold and ${enemyInfo[enemyNum].exp} experience. \u2605\u2605\u2605\x1b[0m`;
+    } else {
+      return `\n\x1b[92mYou\x1b[0m have attacked \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m for \x1b[31m${playerInfo[0].attack}\x1b[0m damage. --- \x1b[35m${enemyInfo[enemyNum].name}'s life:\x1b[0m \x1b[33m${enemyInfo[enemyNum].life}\x1b[0m health points
+        \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m have attacked \x1b[92myou\x1b[0m with \x1b[36m${enemyInfo[enemyNum].skill}\x1b[0m for \x1b[31m${enemyInfo[enemyNum].attack}\x1b[0m damage. --- \x1b[92m${playerInfo[0].name}'s life:\x1b[0m \x1b[33m${playerInfo[0].life}\x1b[0m health points\n`;
+    }
+  } else if (x == 0 && y == -2 && enemyInfo[9].livingStatus == 1) {
+    let enemyNum = 9;
+    enemyInfo[enemyNum].life = enemyInfo[enemyNum].life - playerInfo[0].attack;
+    playerInfo[0].life = playerInfo[0].life - enemyInfo[enemyNum].attack;
+    if (playerInfo[0].life <= 0) {
+      return `\n\x1b[92mYou\x1b[0m have attacked \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m for \x1b[31m${playerInfo[0].attack}\x1b[0m damage. --- \x1b[35m${enemyInfo[enemyNum].name}'s life:\x1b[0m \x1b[33m${enemyInfo[enemyNum].life}\x1b[0m health points
+        \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m have attacked \x1b[92myou\x1b[0m with \x1b[36m${enemyInfo[enemyNum].skill}\x1b[0m for \x1b[31m${enemyInfo[enemyNum].attack}\x1b[0m damage. --- \x1b[92m${playerInfo[0].name}'s life:\x1b[0m \x1b[33m0\x1b[0m health points
+      \n\x1b[31m\u2605\u2605\u2605  You have been defeated by ${enemyInfo[enemyNum].name}.  \u2605\u2605\u2605\x1b[0m
+      --- GAME OVER ---`;
+    }
+    if (enemyInfo[enemyNum].life <= 0) {
+      enemyInfo[enemyNum].livingStatus = enemyInfo[enemyNum].livingStatus - 1;
+      playerInfo[0].life = playerInfo[0].life + enemyInfo[enemyNum].attack;
+      playerInfo[0].gold = playerInfo[0].gold + enemyInfo[enemyNum].gold;
+      playerInfo[0].exp = playerInfo[0].exp + enemyInfo[enemyNum].exp;
+      return `\n\x1b[92mYou\x1b[0m have attacked \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m for \x1b[31m${playerInfo[0].attack}\x1b[0m damage. --- \x1b[35m${enemyInfo[enemyNum].name}'s life:\x1b[0m 0 health points
+        \n\x1b[33m\u2605\u2605\u2605  Victory! You have killed ${enemyInfo[enemyNum].name}. You have gained ${enemyInfo[enemyNum].gold} gold and ${enemyInfo[enemyNum].exp} experience. \u2605\u2605\u2605\x1b[0m`;
+    } else {
+      return `\n\x1b[92mYou\x1b[0m have attacked \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m for \x1b[31m${playerInfo[0].attack}\x1b[0m damage. --- \x1b[35m${enemyInfo[enemyNum].name}'s life:\x1b[0m \x1b[33m${enemyInfo[enemyNum].life}\x1b[0m health points
+        \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m have attacked \x1b[92myou\x1b[0m with \x1b[36m${enemyInfo[enemyNum].skill}\x1b[0m for \x1b[31m${enemyInfo[enemyNum].attack}\x1b[0m damage. --- \x1b[92m${playerInfo[0].name}'s life:\x1b[0m \x1b[33m${playerInfo[0].life}\x1b[0m health points\n`;
+    }
   } else {
     return `There is nothing to attack here.`;
   }
 }
 function observe() {
   if (x == 0 && y == 0) {
-    return `You have seen a hungry homeless peron. He is asking for 100 gold. You know that a signle meal only costs 5 gold.
+    return `You have seen a hungry homeless person. He is asking for 100 gold. You know that a single meal only costs 5 gold.
     You currently have ${playerInfo[0].gold} gold. You can type /give to give your gold.`;
   } else if (x == 1 && y == 1) {
-    return `You see the house of the reknown healer, Yuna. She has been to make great battle healing the villagers and heroes alike.
-    She loves solititude and peace. The house you see is simple but strong. You beautiful little crystals all around her house.
+    return `You see the house of the renown healer, Yuna. She has been to make great battle healing the villagers and heroes alike.
+    She loves solitude and peace. The house you see is simple but strong. You beautiful little crystals all around her house.
     You realize that those crystals are explosives in disguise. Mess with Yuna and you know you are going in a world of hurt.
       To restore your life points type /heal`;
   } else if (x == 1 && y == 0 && enemyInfo[0].livingStatus == 1) {
@@ -249,7 +375,28 @@ function observe() {
       Villagers will be meal soon. You must kill it!"`;
   } else if (x == 0 && y == -1 && enemyInfo[3].livingStatus == 1) {
     return `You see a Mutant Fox. This fox has been a pet of a villager and a lifelong friend of his.
-      But dark magic transformed the friendly fox into a fox of darkness. It has eaten several villagers. You know what you must do."`;
+      But dark magic transformed the friendly fox into a fox of darkness. It has eaten several villagers. You know what you must do.`;
+  } else if (x == -2 && y == 0 && enemyInfo[4].livingStatus == 1) {
+    return `You see a Wild Leopard. This Leopard is very hungry not able to hunt for days.
+    It sees you as a prey. It chases after you.`;
+  } else if (x == -1 && y == 1 && enemyInfo[5].livingStatus == 1) {
+    return `You see a Desert Bee. It is a giant yellow black stripped Bee with a drill as a tail. 
+    It hears your footsteps and you must fight`;
+  } else if (x == 1 && y == -1 && enemyInfo[6].livingStatus == 1) {
+    return `You see a Water Tortoise. It is sleeping gently. Attacking it will wake it up.
+    Turtle meat is now selling for a good price. Killing it will give you wealth.`;
+  } else if (x == 2 && y == 0 && enemyInfo[7].livingStatus == 1) {
+    return `You see a Seaman. These people belong to a water spear wielding race. Be careful not to get poked.`;
+  } else if (x == 2 && y == 1 && enemyInfo[8].livingStatus == 1) {
+    return `Iron Giant walks and the ground shakes. The giant wields a giant sword and a giant shield.
+    This enemy is too strong. DO NOT FIGHT!`;
+  } else if (x == 0 && y == -2 && enemyInfo[8].livingStatus == 1) {
+    return `You see a beautiful jade sculpture of a dragon. The dragon sculpture looks majestic and humongous.
+    You marvel at the shine the jade and have decided to touch it. 
+    
+    The dragon wakes up and stares at you with killing intent. If you do not want to die: PREPARE TO FIGHT!`;
+  } else if (x == -2 && y == 0 && enemyInfo[4].livingStatus == 1) {
+    return ``;
   } else if (
     x == -1 &&
     y == -1 &&
@@ -264,11 +411,30 @@ function observe() {
     event[1]++;
     return `Village Elder Ran: "Thank you ${playerInfo[0].name}. You are our village's savior!
     Let me present you a star award. For the Stars are with you."
-      You have gained +20 max life.     You're current max life points is now: ${playerInfo[0].maxLife}
-      You have gained 85 gold.     You're current gold is now: ${playerInfo[0].gold}`;
-  } else if (x == -1 && y == -1 && event[1] == 0) {
+    You have gained +20 max life.     You're current max life points is now: ${playerInfo[0].maxLife}
+    You have gained 85 gold.     You're current gold is now: ${playerInfo[0].gold}`;
+  } else if (x == -1 && y == -1) {
     return `There is an old house here. It is sturdy and surrounded by totems. You can feel majestic energy surrounding the house.
     It has a signage saying: "Village Elder Ran's House."`;
+  } else if (x == 2 && y == -2 && event[0] == 2) {
+    playerInfo[0].maxLife = playerInfo[0].maxLife + 10;
+    event[0]++;
+    return `The sign says "Lady Sun's Bakery Shop." She sells tasty baked goods. You see many kids and other customers enjoying their bread.
+    Lady Sun has heard of you helping the homeless man in the village. She gives you one chocolate bread.
+      You have gained +10 max life.     You're current max life points is now: ${playerInfo[0].maxLife}`;
+  } else if (x == 2 && y == -2 && event[0] == 3 && event[1] == 1) {
+    playerInfo[0].maxLife = playerInfo[0].maxLife + 120;
+    event[0]++;
+    event[0]++;
+    return `The sign says "Lady Sun's Bakery Shop." She sells tasty baked goods. You see many kids and other customers enjoying their bread.
+    Lady Sun has heard of your great deeds towards the villagers. The word of the mighty hero has spread far and wide.
+    She has known that you are the legendary hero that all her customers a praising everywhere they go. 
+    She gives you a dozen of assorted bread for your contribution towards humanity.
+      You have gained +120 max life.     You're current max life points is now: ${playerInfo[0].maxLife}`;
+  } else if (x == 2 && y == -2) {
+    return `You come to this place and you smell good food in the air. There is a bakery shop close by.
+    The bakery looks like an Asian temple repurposed as bakery. It is surrounded by lanterns with candles inside.
+    The sign says "Lady Sun's Bakery Shop." She sells tasty baked goods. You see many kids and other customers enjoying their bread.`;
   } else {
     return `There is nothing here.`;
   }
@@ -387,7 +553,7 @@ function east() {
     x--;
     return `You cannot go there. You are back at "\x1b[33m(${x}, ${y})\x1b[0m`;
   } else {
-    return `You are located at: "\x1b[33m(${x}, ${y})\x1b[0m`;
+    return `You are located at: \x1b[33m(${x}, ${y})\x1b[0m`;
   }
 }
 function teleport() {

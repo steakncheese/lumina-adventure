@@ -1,2 +1,3 @@
 # tutorial-server
-The tutorial game with server
+
+~~ The tutorial game with server ~~

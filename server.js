@@ -1,5 +1,4 @@
 import express from "express";
-import rl from "readline-sync";
 
 const app = express();
 const port = 4000;
@@ -18,6 +17,7 @@ let playerInfo = [
     maxLife: 100,
     gold: 100,
     exp: 0,
+    id: 100,
   },
 ];
 let enemyInfo = [
@@ -132,10 +132,15 @@ let enemyInfo = [
     skill: "Dragon Blast",
   },
   {
-    name: "Tutorial Dungeon Master",
-    attack: 14,
-    life: 200,
+    name: "Tyrant King",
+    // id: 10,
+    attack: 23,
+    life: 190,
     livingStatus: 1,
+    gold: 260,
+    relic: 1,
+    exp: 300,
+    skill: "Dark Energy Wave",
   },
 ];
 
@@ -331,7 +336,8 @@ function attack() {
         \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m have attacked \x1b[92myou\x1b[0m with \x1b[36m${enemyInfo[enemyNum].skill}\x1b[0m for \x1b[31m${enemyInfo[enemyNum].attack}\x1b[0m damage. --- \x1b[92m${playerInfo[0].name}'s life:\x1b[0m \x1b[33m${playerInfo[0].life}\x1b[0m health points\n`;
     }
   } else if (x == 0 && y == -2 && enemyInfo[9].livingStatus == 1) {
-    let enemyNum = 9;
+  } else if (x == 0 && y == 2 && enemyInfo[10].livingStatus == 1) {
+    let enemyNum = 10;
     enemyInfo[enemyNum].life = enemyInfo[enemyNum].life - playerInfo[0].attack;
     playerInfo[0].life = playerInfo[0].life - enemyInfo[enemyNum].attack;
     if (playerInfo[0].life <= 0) {
@@ -346,13 +352,57 @@ function attack() {
       playerInfo[0].gold = playerInfo[0].gold + enemyInfo[enemyNum].gold;
       playerInfo[0].exp = playerInfo[0].exp + enemyInfo[enemyNum].exp;
       return `\n\x1b[92mYou\x1b[0m have attacked \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m for \x1b[31m${playerInfo[0].attack}\x1b[0m damage. --- \x1b[35m${enemyInfo[enemyNum].name}'s life:\x1b[0m 0 health points
-        \n\x1b[33m\u2605\u2605\u2605  Victory! You have killed ${enemyInfo[enemyNum].name}. You have gained ${enemyInfo[enemyNum].gold} gold and ${enemyInfo[enemyNum].exp} experience. \u2605\u2605\u2605\x1b[0m`;
+        \n\x1b[33m\u2605\u2605\u2605  Victory! You have killed ${enemyInfo[enemyNum].name}. You have liberated the Kingdom of Lumina \u2605\u2605\u2605\x1b[0m
+          --- FIN --- Thank you for playing!`;
     } else {
       return `\n\x1b[92mYou\x1b[0m have attacked \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m for \x1b[31m${playerInfo[0].attack}\x1b[0m damage. --- \x1b[35m${enemyInfo[enemyNum].name}'s life:\x1b[0m \x1b[33m${enemyInfo[enemyNum].life}\x1b[0m health points
         \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m have attacked \x1b[92myou\x1b[0m with \x1b[36m${enemyInfo[enemyNum].skill}\x1b[0m for \x1b[31m${enemyInfo[enemyNum].attack}\x1b[0m damage. --- \x1b[92m${playerInfo[0].name}'s life:\x1b[0m \x1b[33m${playerInfo[0].life}\x1b[0m health points\n`;
     }
   } else {
     return `There is nothing to attack here.`;
+  }
+}
+function buy() {
+  if (x == -1 && y == -2 && event[2] == 0) {
+    event[2]++;
+    return `You have bought flowers from the little girl. She likes you and decides to reveal her secret.
+    She reveals to you that she can heal people to full health. Thank you ${playerInfo[0].name}.
+    Type /heal to restore your life to full.`;
+  } else {
+    return `There is nothing to buy here.`;
+  }
+}
+function test() {
+  if (x == 2 && y == 2 && event[4] == 0) {
+    return `Philosopher Rez: First question. Another name for argument.
+    Type your answer as /answer <-- answer goes here.`;
+  }
+}
+function parameter() {
+  if (x == 2 && y == 2 && event[4] == 0) {
+    event[4]++;
+    return `Yehey! ${playerInfo[0].name}! You got the question right.
+    Philosopher Rez: Second question. It is where you store values in programming.
+    Type your answer as /answer <-- answer goes here.`;
+  }
+}
+function variable() {
+  if (x == 2 && y == 2 && event[4] == 1) {
+    event[4]++;
+    return `Yehey! ${playerInfo[0].name}! You got the question right.
+    Philosopher Rez: Third question. What would say when you are just born in planet Earth? -Abneet
+    Type your answer as /answer <-- answer goes here.`;
+  }
+}
+function helloworld() {
+  if (x == 2 && y == 2 && event[4] == 2) {
+    event[4]++;
+    playerInfo[0].weapon = `Maggie's HAMMER`;
+    playerInfo[0].attack = 50;
+    return `Yehey! ${playerInfo[0].name}! You got the question right.
+    Philosopher Rez: You have proven yourself worthy to wield my ancestor's hammer!
+    I hand you ${playerInfo[0].weapon}!!!
+        You have gained +23 attack damage.     You're current attack damage is now: ${playerInfo[0].attack}`;
   }
 }
 function observe() {
@@ -369,8 +419,8 @@ function observe() {
     The zombie sees you. The zombie chases you. "Arrrrrggghhhh Brrraaaaiiiinssss" the zombie screams.`;
   } else if (x == -1 && y == 0 && enemyInfo[1].livingStatus == 1) {
     return `You see a Wild Boar. It sees you and stopped attacking the villagers. 
-    One of the villagers Kayne, shouts to you: "It is slow but hits hard. Give that beast a nice beating"`;
-  } else if (x == -0 && y == 1 && enemyInfo[2].livingStatus == 1) {
+    One of the villagers Kanye, shouts to you: "It is slow but hits hard. Give that beast a nice beating"`;
+  } else if (x == 0 && y == 1 && enemyInfo[2].livingStatus == 1) {
     return `You see a Wild Spider. You tried to look at it's eyes but you can't. The spider has 8 eyes staring back at you.
       Villagers will be meal soon. You must kill it!"`;
   } else if (x == 0 && y == -1 && enemyInfo[3].livingStatus == 1) {
@@ -395,8 +445,17 @@ function observe() {
     You marvel at the shine the jade and have decided to touch it. 
     
     The dragon wakes up and stares at you with killing intent. If you do not want to die: PREPARE TO FIGHT!`;
-  } else if (x == -2 && y == 0 && enemyInfo[4].livingStatus == 1) {
-    return ``;
+  } else if (x == 2 && y == 2 && event[4] == 0) {
+    return `The streets are buzzing. There are merchants selling their goods on the street. Ranging from chickens, pandesals, bankus, and roasted beaver.
+    There is a big house right beside the middle of the city that houses the Hammer of the Ancients. It is one of the strongest weapons in the world.
+    The house owner is philosopher Rez. He asks worthy adventurers several questions to see if they are worth wielding the hammer.
+    You need a total of 600 experience to be worthy to answer philosopher Rez. You currently have ${playerInfo[0].exp} experience.`;
+  } else if (x == -1 && y == -2 && event[2] == 0) {
+    return `A little girl is selling flowers for her sick mother. These flowers are freshly picked from the garden.
+    The little girl is selling them for 50g. Type /buy to buy some flowers.`;
+  } else if (x == 0 && y == 2) {
+    return `This is the castle of the tyrant King. The castle is dark but elegant. The surrounding air is heavy and you are running out of breath. 
+    Your fate is in your hands! You must liberate the village and finish this once and for all! Prepare for the FINAL BATTLE!!! `;
   } else if (
     x == -1 &&
     y == -1 &&
@@ -412,39 +471,75 @@ function observe() {
     return `Village Elder Ran: "Thank you ${playerInfo[0].name}. You are our village's savior!
     Let me present you a star award. For the Stars are with you."
     You have gained +20 max life.     You're current max life points is now: ${playerInfo[0].maxLife}
-    You have gained 85 gold.     You're current gold is now: ${playerInfo[0].gold}`;
+    You have gained 85 gold.          You're current gold is now: ${playerInfo[0].gold}`;
   } else if (x == -1 && y == -1) {
     return `There is an old house here. It is sturdy and surrounded by totems. You can feel majestic energy surrounding the house.
     It has a signage saying: "Village Elder Ran's House."`;
   } else if (x == 2 && y == -2 && event[0] == 2) {
     playerInfo[0].maxLife = playerInfo[0].maxLife + 10;
     event[0]++;
-    return `The sign says "Lady Sun's Bakery Shop." She sells tasty baked goods. You see many kids and other customers enjoying their bread.
-    Lady Sun has heard of you helping the homeless man in the village. She gives you one chocolate bread.
+    return `The sign says "Lady Moon's Bakery Shop." She sells tasty baked goods. You see many kids and other customers enjoying their bread.
+    Lady Moon has heard of you helping the homeless man in the village. She gives you one chocolate bread.
       You have gained +10 max life.     You're current max life points is now: ${playerInfo[0].maxLife}`;
   } else if (x == 2 && y == -2 && event[0] == 3 && event[1] == 1) {
     playerInfo[0].maxLife = playerInfo[0].maxLife + 120;
     event[0]++;
-    event[0]++;
-    return `The sign says "Lady Sun's Bakery Shop." She sells tasty baked goods. You see many kids and other customers enjoying their bread.
-    Lady Sun has heard of your great deeds towards the villagers. The word of the mighty hero has spread far and wide.
+    event[1]++;
+    return `The sign says "Lady Moon's Bakery Shop." She sells tasty baked goods. You see many kids and other customers enjoying their bread.
+    Lady Moon has heard of your great deeds towards the villagers. The word of the mighty hero has spread far and wide.
     She has known that you are the legendary hero that all her customers a praising everywhere they go. 
     She gives you a dozen of assorted bread for your contribution towards humanity.
       You have gained +120 max life.     You're current max life points is now: ${playerInfo[0].maxLife}`;
   } else if (x == 2 && y == -2) {
     return `You come to this place and you smell good food in the air. There is a bakery shop close by.
     The bakery looks like an Asian temple repurposed as bakery. It is surrounded by lanterns with candles inside.
-    The sign says "Lady Sun's Bakery Shop." She sells tasty baked goods. You see many kids and other customers enjoying their bread.`;
+    The sign says "Lady Moon's Bakery Shop." She sells tasty baked goods. You see many kids and other customers enjoying their bread.`;
+  } else if (x == -2 && y == 2 && event[5] == 0) {
+    return `In a land far, far away....
+    The birds are chirping, the winds are gently blowing the trees, there is fruit hanging on every three, and children playing outside.
+    You have reached The temple of the Great Spirit. There is a statue of angel Gabriel. Beside the statue, you see a widow asking for bread. 
+    You can choose to /give to her so her and her children have something to eat.`;
+  } else if (x == -2 && y == 2 && event[5] == 1) {
+    return `In a land far, far away....
+    The birds are chirping, the winds are gently blowing the trees, there is fruit hanging on every three, and children playing outside.
+    You have reached The temple of the Great Spirit. The citizens believe the angels guide those who do good.`;
+  } else if (x == 1 && y == 2) {
+    return `\n\x1b[36mYou see a Directional Sign Post:\x1b[0m
+    \x1b[33m\u21A0\x1b[0m  \x1b[36m-\x1b[0m  Trial for the Hammer of the Ancients
+    \x1b[33m\u219E\x1b[0m  \x1b[36m-\x1b[0m  Dungeon of the Final Boss
+    \x1b[33m\u21A1\x1b[0m  \x1b[36m-\x1b[0m  Healer Yuna's House\n`;
+  } else if (x == 1 && y == -2) {
+    return `\n\x1b[36mYou see a Directional Sign Post:\x1b[0m
+    \x1b[33m\u21A0\x1b[0m  \x1b[36m-\x1b[0m  Lady Moon's Bakery;
+    \x1b[33m\u219E\x1b[0m  \x1b[36m-\x1b[0m  Water Dragon Jade Statue
+    \x1b[33m\u219F\x1b[0m  \x1b[36m-\x1b[0m  Water Tortoise Caverns\n`;
+  } else if (x == -2 && y == 1) {
+    return `\n\x1b[36mYou see a Directional Sign Post:\x1b[0m
+    \x1b[33m\u219F\x1b[0m  \x1b[36m-\x1b[0m  Temple of the Great Spirit
+    \x1b[33m\u21A1\x1b[0m  \x1b[36m-\x1b[0m  Wild Leopard's Territory
+    \x1b[33m\u21A0\x1b[0m  \x1b[36m-\x1b[0m  Wild Desert with honey trap\n`;
+  } else if (x == -2 && y == -1) {
+    return `\n\x1b[36mYou see a Directional Sign Post:\x1b[0m
+    \x1b[33m\u219F\x1b[0m  \x1b[36m-\x1b[0m  Wild Leopard's Territory
+    \x1b[33m\u21A1\x1b[0m  \x1b[36m-\x1b[0m  Pirate's Shop
+    \x1b[33m\u21A0\x1b[0m  \x1b[36m-\x1b[0m  Village Elder Ran's House
+    You have also found who is the one making all these Sign Posts. Type /talk to talk to her.\n`;
   } else {
     return `There is nothing here.`;
   }
 }
-let event = [0, 0];
+let event = [0, 0, 0, 0, 0, 0];
 function give() {
   if (x == 0 && y == 0 && event[0] == 0) {
     playerInfo[0].gold = playerInfo[0].gold - 100;
     event[0]++;
     return `You currently have ${playerInfo[0].gold} gold. He wants to /talk to you.`;
+  } else if (x == -2 && y == 2 && event[5] == 0) {
+    playerInfo[0].maxLife = playerInfo[0].maxLife + 30;
+    playerInfo[0].gold = playerInfo[0].gold - 50;
+    event[5]++;
+    return `Angel Gabriel looks from the sky and is pleased with your good deeds. You have received his blessings.
+      You have gained +30 max life.     You're current max life points is now: ${playerInfo[0].maxLife}`;
   } else {
     return `You cannot give anymore.`;
   }
@@ -458,7 +553,17 @@ function talk() {
     But I have something that might be valuable to you when the time comes.
     If your life is in danger, go to (1,1) to find Yuna, the Healer. She will tend your wounds until you are healthy.
     Thank you adventurer. May the Great Spirit be with you. He smiles gently as he walks away from you.
-        You have gained +10 max life.     You're current max life points is now: ${playerInfo[0].maxLife}`;
+    You have gained +10 max life.     You're current max life points is now: ${playerInfo[0].maxLife}`;
+  } else if (x == -2 && y == -1 && event[3] == 0) {
+    playerInfo[0].maxLife = playerInfo[0].maxLife + 10;
+    event[3]++;
+    return `Lady in a blue dress: Helllllooooooo ${playerInfo[0].name}. Nice to meet you. Now you get to meet who makes these Sign Posts.
+    I had a good corporate job before being a Sign Post maker but something inside me says that I have to go and find my own path.
+    Now here I am guiding travelers through their life path. Thank you for listening to my story. I'll go bake a cake now.
+    You have gained +10 max life.     You're current max life points is now: ${playerInfo[0].maxLife}`;
+  } else if (x == 2 && y == 2 && event[4] == 0 && playerInfo[0].exp >= 0) {
+    return `Philosopher Rez: Fellow adventurer, you have proven yourself worthy to take the test to acquire the ancient hammer.
+    Answer my questions and riddles and you will own the best hammer in the world. Type /test to take the test.`;
   } else {
     return `There is no one to talk to.`;
   }
@@ -466,7 +571,10 @@ function talk() {
 function heal() {
   if (x == 1 && y == 1) {
     playerInfo[0].life = playerInfo[0].maxLife;
-    return `Yuna, the Healer: Hello ${playerInfo[0].name}! Free heals for you.
+    return `Yuna, the Healer: Hello ${playerInfo[0].name}! Free heals for you!
+    Your health has been restored to full.     You're current life points is now: ${playerInfo[0].life}`;
+  } else if (x == -1 && y == -2 && event[2] == 1) {
+    return `Little girl: Thank you ${playerInfo[0].name}. My mother is now feeling better after I got her the medicine she needs. Free heals for you!
     Your health has been restored to full.     You're current life points is now: ${playerInfo[0].life}`;
   } else {
     return `You are at (${x}, ${y}). This is not the place for you to get healed.`;
@@ -487,10 +595,6 @@ function help() {
   To see where you are located: \x1b[36m/l\x1b[0m or \x1b[36m/location\x1b[0m
   To attack an enemy: \x1b[36m/k\x1b[0m or \x1b[36m/attack\x1b[0m
     The other things you must learn as you go. For it is by \x1b[31mfire\x1b[0m that \x1b[33mgold\x1b[0m is made.\n`;
-}
-function askPlayerName() {
-  // playerInfo[0].name = rl.question(`What is your name hero?`);
-  return `${welcome}`;
 }
 let cheatTrigger = [0, 0];
 function poweroverwhelming() {
@@ -526,7 +630,7 @@ function west() {
     x++;
     return `You cannot go there. You are back at \x1b[33m(${x}, ${y})\x1b[0m`;
   } else {
-    return `You are located at: \x1b[33m(${x}, ${y})\x1b[0m`;
+    return `Moving West \x1b[36m\u2190\x1b[0m You are located at: \x1b[33m(${x}, ${y})\x1b[0m`;
   }
 }
 function north() {
@@ -535,7 +639,7 @@ function north() {
     y--;
     return `You cannot go there. You are back at \x1b[33m(${x}, ${y})\x1b[0m`;
   } else {
-    return `You are located at: \x1b[33m(${x}, ${y})\x1b[0m`;
+    return `Moving North \x1b[36m\u2191\x1b[0m You are located at: \x1b[33m(${x}, ${y})\x1b[0m`;
   }
 }
 function south() {
@@ -544,16 +648,16 @@ function south() {
     y++;
     return `You cannot go there. You are back at \x1b[33m(${x}, ${y})\x1b[0m`;
   } else {
-    return `You are located at: \x1b[33m(${x}, ${y})\x1b[0m`;
+    return `Moving South \x1b[36m\u2193\x1b[0m You are located at: \x1b[33m(${x}, ${y})\x1b[0m`;
   }
 }
 function east() {
   x++;
   if (x > 2) {
     x--;
-    return `You cannot go there. You are back at "\x1b[33m(${x}, ${y})\x1b[0m`;
+    return `You cannot go there. You are back at \x1b[33m(${x}, ${y})\x1b[0m`;
   } else {
-    return `You are located at: \x1b[33m(${x}, ${y})\x1b[0m`;
+    return `Moving East \x1b[36m\u2192\x1b[0m You are located at: \x1b[33m(${x}, ${y})\x1b[0m`;
   }
 }
 function teleport() {
@@ -565,11 +669,26 @@ function location() {
   return `\x1b[33mYou are located at: (${x}, ${y})\x1b[0m`;
 }
 
+app.get("/buy", (request, response) => {
+  response.send(buy());
+});
 app.get("/teleport", (request, response) => {
   response.send(teleport());
 });
 app.get("/help", (request, response) => {
   response.send(help());
+});
+app.get("/test", (request, response) => {
+  response.send(test());
+});
+app.get("/parameter", (request, response) => {
+  response.send(parameter());
+});
+app.get("/variable", (request, response) => {
+  response.send(variable());
+});
+app.get("/helloworld", (request, response) => {
+  response.send(helloworld());
 });
 app.get("/heal", (request, response) => {
   response.send(heal());
@@ -580,10 +699,10 @@ app.get("/attack", (request, response) => {
 app.get("/k", (request, response) => {
   response.send(attack());
 });
-app.get("/", (request, response) => {
-  response.send(askPlayerName());
-});
 app.get("/welcome", (request, response) => {
+  response.send(welcome());
+});
+app.get("/", (request, response) => {
   response.send(welcome());
 });
 app.get("/d", (request, response) => {

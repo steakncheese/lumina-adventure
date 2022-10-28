@@ -622,6 +622,12 @@ function welcome() {
 You open your eyes and now you are transported to the tutorial area. Your current position is \x1b[33m(0,0)\x1b[0m.
 
           \x1b[92m\u2605\u2605\u2605\x1b[0m  Type in \x1b[36m/help\x1b[0m to proceed  \x1b[92m\u2605\u2605\u2605\x1b[0m 
+
+\x1b[33Tips on playing the game:\x1b[0m
+-------------------------------------------------
+1. Every action uses curl. So if you want to move north, the instructions say /w. It means to type out curl localhost:4000/w to go north.
+            
+2. To prevent typing curls over and over again, press up on your terminal so it displays your previous command. 
             `;
 }
 function west() {

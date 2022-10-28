@@ -5,6 +5,7 @@
 ███░███░██░██░██░██░█░▀▀▄██░▄█░▀▀░█░██
 ███░████▄▄▄██▄███▄▄██▄█▄▄█▄▄▄█▄██▄█▄▄█
 ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
+
 Welcome to Tutorial Area!!!
 
 Oracle: You have been summoned to protect the Kingdom of Lumina but have to prove yourself worthy of the power of Hero.

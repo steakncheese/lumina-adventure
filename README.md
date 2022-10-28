@@ -50,10 +50,15 @@ You open your eyes and now you are transported to the tutorial area.
 ## How to play the game:
 
 Instructions: To move, type /w North, /s South, /a West, or /d East then press Enter.
+
 To see info on current location: /o or observe
+
 **_ Recommendation: Use /o in every tile you go _**
+
 To see where you are located: /lor /location
+
 To attack an enemy: /k or attack
+
 The other things you must learn as you go. For it is by fire that gold is made.
 
 Enjoy!!!

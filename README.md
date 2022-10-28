@@ -6,6 +6,12 @@
 ███░████▄▄▄██▄███▄▄██▄█▄▄█▄▄▄█▄██▄█▄▄█
 ▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀
 
+Tutorial: The Game
+Genre: Role-playing game
+Summary: Fight your way against monsters, save the villagers, and save the kingdom from the tyrant king!
+
+---
+
 Welcome to Tutorial Area!!!
 
 Oracle: You have been summoned to protect the Kingdom of Lumina but have to prove yourself worthy of the power of Hero.

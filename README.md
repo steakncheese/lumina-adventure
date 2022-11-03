@@ -37,9 +37,11 @@ You open your eyes and now you are transported to the tutorial area.
 
 1. Open a terminal in VS code.
 
-2. Type npm start. This will start the server.
+2. Type npm install express. ** Do this only once. You never have to do this again. **
 
-3. Open another terminal. Type curl localhost:4000/ to start the game
+3. Type npm start. This will start the server.
+
+4. Open another terminal. Type curl localhost:4000/ to start the game
 
 ---
 

@@ -1,7 +1,7 @@
 import express from "express";
 
 const app = express();
-const port = 4000;
+const port = 6000;
 
 app.use(express.json());
 
@@ -183,7 +183,7 @@ function attack() {
       playerInfo[0].exp = playerInfo[0].exp + enemyInfo[enemyNum].exp;
       return `\n\x1b[92mYou\x1b[0m have attacked \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m for \x1b[31m${playerInfo[0].attack}\x1b[0m damage. --- \x1b[35m${enemyInfo[enemyNum].name}'s life:\x1b[0m 0 health points
         \n\x1b[33m\u2605\u2605\u2605  Victory! You have killed ${enemyInfo[enemyNum].name}. You have gained ${enemyInfo[enemyNum].gold} gold and ${enemyInfo[enemyNum].exp} experience. \u2605\u2605\u2605\x1b[0m
-        The village elder Ran tells you that her house is just located south at (-1,-1). Kill all the monsters surrounding the starting location to get a reward.`;
+        The village Master Jeremiah tells you that her house is just located south at (-1,-1). Kill all the monsters surrounding the starting location to get a reward.`;
     } else {
       return `\n\x1b[92mYou\x1b[0m have attacked \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m for \x1b[31m${playerInfo[0].attack}\x1b[0m damage. --- \x1b[35m${enemyInfo[enemyNum].name}'s life:\x1b[0m \x1b[33m${enemyInfo[enemyNum].life}\x1b[0m health points
         \x1b[35m${enemyInfo[enemyNum].name}\x1b[0m have attacked \x1b[92myou\x1b[0m with \x1b[36m${enemyInfo[enemyNum].skill}\x1b[0m for \x1b[31m${enemyInfo[enemyNum].attack}\x1b[0m damage. --- \x1b[92m${playerInfo[0].name}'s life:\x1b[0m \x1b[33m${playerInfo[0].life}\x1b[0m health points\n`;
@@ -469,13 +469,13 @@ function observe() {
     playerInfo[0].maxLife = playerInfo[0].maxLife + 20;
     playerInfo[0].gold = playerInfo[0].gold + 75;
     event[1]++;
-    return `\nVillage Elder Ran: "Thank you ${playerInfo[0].name}. You are our village's savior!
-    Let me present you a star award. For the Stars are with you."
+    return `\nVillage Master Jeremiah: "Thank you ${playerInfo[0].name}. You are our village's savior!
+    Let me present you a a totem from our ancestors. You have proved your worth to the greater spirits.
     You have gained +20 max life.     You're current max life points is now: ${playerInfo[0].maxLife}
     You have gained 85 gold.          You're current gold is now: ${playerInfo[0].gold}`;
   } else if (x == -1 && y == -1) {
     return `\nThere is an old house here. It is sturdy and surrounded by totems. You can feel majestic energy surrounding the house.
-    It has a signage saying: "Village Elder Ran's House."`;
+    It has a signage saying: "Village Master Jeremiah's House."`;
   } else if (x == 2 && y == -2 && event[0] == 2) {
     playerInfo[0].maxLife = playerInfo[0].maxLife + 10;
     event[0]++;
@@ -522,7 +522,7 @@ function observe() {
   } else if (x == -2 && y == -1) {
     return `\n\x1b[36mYou see a Directional Sign Post:\x1b[0m
     \x1b[33m\u219F\x1b[0m  \x1b[36m-\x1b[0m  Wild Leopard's Territory
-    \x1b[33m\u21A0\x1b[0m  \x1b[36m-\x1b[0m  Village Elder Ran's House
+    \x1b[33m\u21A0\x1b[0m  \x1b[36m-\x1b[0m  Village Master Jeremiah's House
     You have also found who is the one making all these Sign Posts. Type \x1b[36m\u2605\u2605\u2605 /talk \u2605\u2605\u2605\x1b[0m to talk to her.\n`;
   } else {
     return `\nThere is nothing here.`;

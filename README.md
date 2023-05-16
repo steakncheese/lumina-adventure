@@ -1,5 +1,5 @@
 # tutorial-server
-![Alt text](assets/lumina_kingdom.png)
+<!-- ![Alt text](assets/lumina_kingdom.png) -->
 
 Tutorial: The Game\
 Genre: Role-playing game\

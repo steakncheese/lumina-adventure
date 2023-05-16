@@ -1,7 +1,7 @@
 # tutorial-server
 ![Alt text](assets/kingdom.png)
 
-Tutorial: The Game\
+**Tutorial: The Game**\
 Genre: Role-playing game\
 Summary: Fight your way against monsters, save the villagers, and save the kingdom from the tyrant king!
 

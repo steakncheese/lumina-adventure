@@ -1,7 +1,7 @@
-# tutorial-server
+# lumina-adventure
 ![Alt text](assets/kingdom.png)
 
-**Tutorial: The Game**\
+**Lumina Adventure**\
 Genre: Role-playing game\
 Summary: Fight your way against monsters, save the villagers, and save the kingdom from the tyrant king!
 
